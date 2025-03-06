@@ -15,7 +15,7 @@ from .forms import EditProfileForm
 from .forms import AddOfficerForm
 import logging
 
-import fitz  # PyMuPDF
+import pymupdf as fitz  # PyMuPDF
 import os
 import docx
 import pytesseract
