@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>upload</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+{% block content %}
+<h2>Upload a Document</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+</form>
+
+{% if extracted_text %}
+    <h3>Extracted Information:</h3>
+    <p><strong>Name:</strong> {{ processed_data.name }}</p>
+    <p><strong>Email:</strong> {{ processed_data.email }}</p>
+    <p><strong>GPA:</strong> {{ processed_data.gpa }}</p>
+    <p><strong>Program:</strong> {{ processed_data.program }}</p>
+    <h4>Full Extracted Text:</h4>
+    <pre>{{ extracted_text }}</pre>
+{% endif %}
+
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.urls import path 
 from .views import home, signup, signin, signout, dashboard, admin_dashboard, officer_dashboard, view_profile, update_candidate_status, send_message, message_page
-from .views import create_event, invite_candidate_to_event, edit_profile, add_officer, remove_officer
+from .views import create_event, invite_candidate_to_event, edit_profile, add_officer, remove_officer, upload_document, add_candidate
   
 urlpatterns = [ 
     path("", home, name="home"), 
@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin-dashboard/add-officer/', add_officer, name='add_officer'),
     path('admin-dashboard/remove-officer/<int:user_id>/', remove_officer, name='remove_officer'),
     path("update-candidate/<int:candidate_id>/", update_candidate_status, name="update_candidate_status"),
-
+    path("upload-document/", upload_document, name="upload_document"),
+    path("add_candidate/", add_candidate, name="add_candidate"),
 ]

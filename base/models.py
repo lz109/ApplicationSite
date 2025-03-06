@@ -31,12 +31,21 @@ class User(AbstractUser):
 # Candidate Model
 class Candidate(models.Model):
     PROGRAM_CHOICES = (
-        ('engineering', 'Engineering'),
-        ('math', 'Math'),
-        ('science', 'Science'),
-        ('business', 'Business'),
-        ('arts', 'Arts'),
-    )
+    ('civil_engineering', 'Civil Engineering'),
+    ('mechanical_engineering', 'Mechanical Engineering'),
+    ('electrical_engineering', 'Electrical Engineering'),
+    ('computer_engineering', 'Computer Engineering'),
+    ('chemical_engineering', 'Chemical Engineering'),
+    ('biomedical_engineering', 'Biomedical Engineering'),
+    ('aerospace_engineering', 'Aerospace Engineering'),
+    ('industrial_engineering', 'Industrial Engineering'),
+    ('software_engineering', 'Software Engineering'),
+    ('math', 'Math'),
+    ('science', 'Science'),
+    ('business', 'Business'),
+    ('arts', 'Arts'),
+)
+
     
     STATUS_CHOICES = (
         ('pending', 'Pending'),
@@ -48,7 +57,7 @@ class Candidate(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     program_fit = models.CharField(max_length=50, choices=PROGRAM_CHOICES, default='engineering')
-    scores = models.IntegerField()
+    gpa = models.IntegerField()
     application_status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="pending")
     shortlisted = models.BooleanField(default=False)
 
