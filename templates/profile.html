@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+{% block content %}
+<h2>Profile</h2>
+<p><strong>Username:</strong> {{ user.username }}</p>
+<p><strong>Email:</strong> {{ user.email }}</p>
+<p><strong>Role:</strong> {{ user.get_role_display }}</p>
+<p><strong>Job Title:</strong> {{ user.job_title }}</p>
+<p><strong>Contact Details:</strong> {{ user.contact_details }}</p>
+
+<a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+{% endblock %}

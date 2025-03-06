@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<h2>Messages</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <h3>Received Messages</h3>
+        <div class="scrollable-table">
+            <table class="table fixed-width">
+                <thead>
+                    <tr>
+                        <th>From</th>
+                        <th>Message</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for message in messages_received %}
+                    <tr>
+                        <td>{{ message.sender.username }}</td>
+                        <td class="message-content">{{ message.content }}</td>
+                        <td>{{ message.timestamp }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" class="text-center">No messages received.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <h3>Sent Messages</h3>
+        <div class="scrollable-table">
+            <table class="table fixed-width">
+                <thead>
+                    <tr>
+                        <th>To</th>
+                        <th>Message</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for message in messages_sent %}
+                    <tr>
+                        <td>{{ message.receiver_email }}</td>
+                        <td class="message-content">{{ message.content }}</td>
+                        <td>{{ message.timestamp }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" class="text-center">No messages sent.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

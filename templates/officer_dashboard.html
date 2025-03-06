@@ -18,6 +18,171 @@
         </nav>
     </header>
 
+<!-- Events Section -->
+<h3>Upcoming Event Calendar</h3>
+<div id="calendar"></div>
+
+<!-- Load FullCalendar.js -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            height: 400, // Adjust height to make it smaller
+            contentHeight: 350, // Reduce the content height
+            aspectRatio: 1.5,
+            events: [
+                {% for event in events %}
+                {
+                    title: "{{ event.title }}",
+                    start: "{{ event.date|date:'Y-m-d H:i:s' }}",
+                    description: "{{ event.description }}",
+                    created_by: "{{ event.created_by }}",
+                    members: "{% for member in event.members.all %}{{ member.name }}{% if not forloop.last %}, {% endif %}{% endfor %}"
+                },
+                {% endfor %}
+            ],
+            eventClick: function (info) {
+                alert(
+                    "Event: " + info.event.title + "\n" +
+                    "Description: " + info.event.extendedProps.description + "\n" +
+                    "Host: " + info.event.extendedProps.created_by + "\n" +
+                    "Members: " + info.event.extendedProps.members
+                );
+            }
+        });
+        calendar.render();
+    });
+</script>
+
+
+<!-- Create New Event Form -->
+<h3>Create an Event</h3>
+<form method="post" action="{% url 'create_event' %}" class="mb-3">
+    {% csrf_token %}
+    <input type="text" name="title" class="form-control mb-2" placeholder="Event Title" required>
+    <textarea name="description" class="form-control mb-2" placeholder="Event Description" required></textarea>
+    <input type="datetime-local" name="date" class="form-control mb-2" required>
+    <button type="submit" class="btn btn-primary">Create Event</button>
+</form>
+<h3>Invite Candidates to an Event</h3>
+<form method="post" action="{% url 'invite_candidate_to_event' %}" class="mb-3">
+    {% csrf_token %}
+    
+    <label for="event">Select Event:</label>
+    <select name="event_id" class="form-select mb-2" required>
+        <option value="" disabled selected>Choose an event</option>
+        {% for event in events %}
+        <option value="{{ event.id }}">{{ event.title }} - {{ event.date }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="candidate">Select Candidate:</label>
+    <select name="candidate_id" class="form-select mb-2" required>
+        <option value="" disabled selected>Choose a candidate</option>
+        {% for candidate in candidates %}
+        <option value="{{ candidate.id }}">{{ candidate.name }} - {{ candidate.email }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit" class="btn btn-primary">Invite Candidate</button>
+</form>
+
+
+    <h3>Filter Candidates</h3>
+<form method="get" class="mb-3">
+    <div class="row">
+        <!-- Program Fit Filter -->
+        <div class="col-md-4">
+            <label for="program_fit">Program Fit:</label>
+            <select name="program_fit" class="form-select">
+                <option value="">All</option>
+                <option value="engineering" {% if request.GET.program_fit == "engineering" %}selected{% endif %}>Engineering</option>
+                <option value="math" {% if request.GET.program_fit == "math" %}selected{% endif %}>Math</option>
+                <option value="science" {% if request.GET.program_fit == "science" %}selected{% endif %}>Science</option>
+                <option value="business" {% if request.GET.program_fit == "business" %}selected{% endif %}>Business</option>
+                <option value="arts" {% if request.GET.program_fit == "arts" %}selected{% endif %}>Arts</option>
+            </select>
+        </div>
+
+        <!-- Application Status Filter -->
+        <div class="col-md-4">
+            <label for="application_status">Application Status:</label>
+            <select name="application_status" class="form-select">
+                <option value="">All</option>
+                <option value="pending" {% if request.GET.application_status == "pending" %}selected{% endif %}>Pending</option>
+                <option value="accepted" {% if request.GET.application_status == "accepted" %}selected{% endif %}>Accepted</option>
+                <option value="rejected" {% if request.GET.application_status == "rejected" %}selected{% endif %}>Rejected</option>
+                <option value="waitlisted" {% if request.GET.application_status == "waitlisted" %}selected{% endif %}>Waitlisted</option>
+            </select>
+        </div>
+
+        <!-- Score Sorting -->
+        <div class="col-md-4">
+            <label for="score_sort">Sort by Scores:</label>
+            <select name="score_sort" class="form-select">
+                <option value="">None</option>
+                <option value="high_to_low" {% if request.GET.score_sort == "high_to_low" %}selected{% endif %}>High to Low</option>
+                <option value="low_to_high" {% if request.GET.score_sort == "low_to_high" %}selected{% endif %}>Low to High</option>
+            </select>
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
+</form>
+
+<h3>All Candidates</h3>
+<!-- Link to Messages Page -->
+<a href="{% url 'messages_page' %}" class="btn btn-info mb-3">View Messages</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Program Fit</th>
+            <th>Scores</th>
+            <th>Application Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for candidate in candidates %}
+<tr>
+    <td>{{ candidate.name }}</td>
+    <td>{{ candidate.email }}</td>
+    <td>{{ candidate.get_program_fit_display }}</td>
+    <td>{{ candidate.scores }}</td>
+    <td>
+        <form method="post" action="{% url 'update_candidate_status' candidate.id %}">
+            {% csrf_token %}
+            <select name="application_status" class="form-select">
+                <option value="pending" {% if candidate.application_status == "pending" %}selected{% endif %}>Pending</option>
+                <option value="accepted" {% if candidate.application_status == "accepted" %}selected{% endif %}>Accept</option>
+                <option value="rejected" {% if candidate.application_status == "rejected" %}selected{% endif %}>Reject</option>
+            </select>
+            <button type="submit" class="btn btn-sm btn-primary mt-1">Update</button>
+        </form>
+    </td>
+    <td>
+        <form method="post" action="{% url 'send_message' %}">
+            {% csrf_token %}
+            <input type="hidden" name="candidate_id" value="{{ candidate.id }}">
+            <textarea name="content" class="form-control" placeholder="Write your message here..." required></textarea>
+            <button type="submit" class="btn btn-primary mt-2">Send</button>
+        </form>
+    </td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan="7" class="text-center">No candidates found.</td>
+</tr>
+{% endfor %}
+
+    </tbody>
+</table>
 
     <footer>
         <p>&copy; 2025 Admissions Dashboard. All Rights Reserved.</p>

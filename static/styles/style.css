@@ -163,3 +163,98 @@ footer {
   padding: 10px;
   margin-top: 20px;
 }
+
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Page Title */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Messages Section */
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Message Tables */
+.table {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table th {
+  background-color: #007bff;
+  color: white;
+  text-align: left;
+  padding: 10px;
+}
+
+.table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Column Containers */
+.col-md-6 {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h3 {
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Empty Message Text */
+.text-center {
+  color: #666;
+  font-style: italic;
+}
+/* Scrollable container with fixed height */
+.scrollable-table {
+  max-height: 300px;  /* Limits height */
+  overflow-y: auto;   /* Vertical scrollbar */
+  overflow-x: hidden; /* Prevents horizontal scroll */
+  border: 1px solid #ddd;
+  padding: 5px;
+  background: #f8f9fa;
+  border-radius: 5px;
+}
+
+/* Limit table width */
+.fixed-width {
+  width: 300px; /* Set max width */
+  table-layout: fixed; /* Ensures equal column spacing */
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* Limit message column width */
+.message-content {
+  max-width: 350px; /* Restrict message column */
+  overflow-wrap: break-word; /* Break long words */
+  word-wrap: break-word;
+  white-space: normal;
+}
