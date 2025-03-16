@@ -65,6 +65,7 @@ class Candidate(models.Model):
     skills = models.TextField(blank=True, null=True)  # List of technical & soft skills
     projects = models.TextField(blank=True, null=True)
 
+    officer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="candidates")
     def __str__(self):
         return self.name
 

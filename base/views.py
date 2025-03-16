@@ -100,8 +100,8 @@ def officer_dashboard(request):
     application_status_filter = request.GET.get("application_status", "")
     college_filter = request.GET.get("college_name", "")
     score_sort = request.GET.get("score_sort", "")
-
-    candidates = Candidate.objects.all()
+    officers = User.objects.filter(role="officer")
+    candidates = Candidate.objects.filter(officer=request.user)
     events = Event.objects.all().order_by("-date")
 
     if program_fit_filter:
@@ -168,13 +168,14 @@ def officer_dashboard(request):
                 print("Database error:", e)
                 messages.error(request, "Error saving candidate data. Please check for duplicates.")
 
-            candidates = Candidate.objects.all()
-
+            candidates = Candidate.objects.filter(officer=request.user)
+            officers = User.objects.filter(role="officer")
     return render(request, "officer_dashboard.html", {
         "candidates": candidates,
         "events": events,
         "form": form,
-        "extracted_data": extracted_data
+        "extracted_data": extracted_data,
+        "officers": officers
     })
 
 
@@ -245,7 +246,7 @@ def send_message_to_user(request):
 @login_required
 def message_page(request):
     users = User.objects.exclude(id=request.user.id)  # Get all users except the logged-in user
-    candidates = Candidate.objects.all()  # Get all candidates
+    candidates = Candidate.objects.filter(officer=request.user)  # Get all candidates
 
     # Messages sent by the logged-in officer/admin
     messages_sent = Message.objects.filter(sender=request.user).order_by("-timestamp")
@@ -492,7 +493,8 @@ def upload_document(request):
                     "program_fit": extracted_data["program"],
                     "academic_experience": extracted_data["academic_experience"],
                     "skills": extracted_data["skills"],
-                    "projects": extracted_data["projects"]
+                    "projects": extracted_data["projects"],
+                    "officer": request.user  # Assign to logged-in officer
                 }
             )
 
@@ -515,7 +517,7 @@ def upload_document(request):
                         CollegeApplication.objects.create(
                             candidate=candidate, college_name=college_name, application_status="pending"
                         )
-            candidates = Candidate.objects.all()  # Fetch all candidates
+            candidates = Candidate.objects.filter(officer=request.user)  # Fetch all candidates
             applications = CollegeApplication.objects.all()  # Fetch all applications
 
             return render(request, "officer_dashboard.html", {
@@ -531,6 +533,8 @@ def upload_document(request):
     return render(request, "upload_document.html", {"form": form})
 
 
+@login_required
+@user_passes_test(is_officer)
 def add_candidate(request):
     if request.method == "POST":
         name = request.POST.get("name")
@@ -543,15 +547,23 @@ def add_candidate(request):
         projects = request.POST.get("projects", "").strip()
 
         # Extract multiple colleges and statuses from the form
-        college_names = request.POST.getlist("college_name[]")  # Get list of college names
-        application_statuses = request.POST.getlist("application_status[]")  # Get list of statuses
+        college_names = request.POST.getlist("college_name[]")
+        application_statuses = request.POST.getlist("application_status[]")
+
+        # Get the selected officer
+        officer_id = request.POST.get("officer")
+        officer = User.objects.filter(id=officer_id, role="officer").first()
+
+        if not officer:
+            messages.error(request, "Invalid officer selection.")
+            return redirect("add_candidate")
 
         # Check if the candidate already exists
         if Candidate.objects.filter(email=email).exists():
             messages.error(request, "A candidate with this email already exists.")
             return redirect("officer_dashboard")
 
-        # Create a new candidate
+        # Create a new candidate assigned to the selected officer
         candidate = Candidate.objects.create(
             name=name,
             email=email,
@@ -560,7 +572,8 @@ def add_candidate(request):
             shortlisted=shortlisted,
             academic_experience=academic_experience,
             skills=skills,
-            projects=projects
+            projects=projects,
+            officer=officer  # Assign chosen officer
         )
 
         # Create CollegeApplication entries for each selected college
@@ -572,9 +585,12 @@ def add_candidate(request):
             )
 
         messages.success(request, "Candidate and applications added successfully!")
-        return redirect("officer_dashboard")  # Redirect after successful submission
+        return redirect("officer_dashboard")
 
-    return render(request, "officer_dashboard.html")
+    # Get all officers to display in the dropdown
+    officers = User.objects.filter(role="officer")
+    print("Officers passed to template:", officers)
+    return render(request, "officer_dashboard.html", {"officers": officers})
 
 def candidate_profile(request, candidate_id):
     candidate = get_object_or_404(Candidate, id=candidate_id)
@@ -584,32 +600,34 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Candidate, CollegeApplication
 
+@login_required
+@user_passes_test(is_officer)
 def edit_candidate(request, candidate_id):
-    candidate = get_object_or_404(Candidate, id=candidate_id)
+    candidate = get_object_or_404(Candidate, id=candidate_id, officer=request.user)  # Only allow editing their own candidates
 
     if request.method == "POST":
-        # Update candidate details
         candidate.name = request.POST.get("name", "").strip()
         candidate.email = request.POST.get("email", "").strip()
         candidate.program_fit = request.POST.get("program_fit", "").strip()
         
-        # Ensure GPA is correctly handled (convert to float, default to 0.0 if invalid)
         try:
             candidate.gpa = float(request.POST.get("gpa", candidate.gpa))
         except ValueError:
-            candidate.gpa = candidate.gpa  # Keep existing GPA if input is invalid
+            candidate.gpa = candidate.gpa
 
         candidate.academic_experience = request.POST.get("academic_experience", "").strip()
         candidate.skills = request.POST.get("skills", "").strip()
         candidate.projects = request.POST.get("projects", "").strip()
         candidate.save()
 
-        # Update college applications
-        college_names = request.POST.getlist("college_name[]")  # List of colleges
-        application_statuses = request.POST.getlist("application_status[]")  # List of statuses
+        # **Handle College Applications**
+        college_names = request.POST.getlist("college_name[]")  # List of college names
+        application_statuses = request.POST.getlist("application_status[]")  # Corresponding statuses
 
-        # Remove old applications and add new ones
-        candidate.applications.all().delete()
+        # **Clear old applications before adding updated ones**
+        candidate.applications.all().delete()  
+
+        # **Save new college applications**
         for college_name, application_status in zip(college_names, application_statuses):
             if college_name.strip():  # Ensure not empty
                 CollegeApplication.objects.create(
@@ -618,30 +636,56 @@ def edit_candidate(request, candidate_id):
                     application_status=application_status.strip()
                 )
 
-        messages.success(request, "Candidate details updated successfully!")
+        messages.success(request, "Candidate details and colleges applied updated successfully!")
         return redirect("candidate_profile", candidate_id=candidate.id)
 
     return render(request, "edit_candidate.html", {"candidate": candidate})
 
+from django.shortcuts import render
+from .models import Candidate, CollegeApplication
 
-# from django.db.utils import IntegrityError
-# from .models import Candidate
+def statistics_view(request):
+    # Count candidates and applications
+    total_candidates = Candidate.objects.count()
+    total_college_applications = CollegeApplication.objects.count()
+    accepted_college_applications = CollegeApplication.objects.filter(application_status="accepted").count()
+    rejected_college_applications = CollegeApplication.objects.filter(application_status="rejected").count()
+    pending_college_applications = CollegeApplication.objects.filter(application_status="pending").count()
+    waitlisted_college_applications = CollegeApplication.objects.filter(application_status="waitlisted").count()
 
-# # Pre-load Sample Candidates
-# sample_candidates = [
-#     {"name": "Alice Johnson", "email": "alice@example.com", "program_fit": "engineering", "scores": 90, "application_status": "pending"},
-#     {"name": "Bob Smith", "email": "bob@example.com", "program_fit": "math", "scores": 85, "application_status": "accepted"},
-#     {"name": "Charlie Brown", "email": "charlie@example.com", "program_fit": "science", "scores": 78, "application_status": "waitlisted"},
-#     {"name": "Diana Prince", "email": "diana@example.com", "program_fit": "business", "scores": 92, "application_status": "accepted"},
-#     {"name": "Ethan Hunt", "email": "ethan@example.com", "program_fit": "arts", "scores": 88, "application_status": "pending"},
-# ]
+    # Compute acceptance ratio: accepted applications / total applications
+    if total_college_applications > 0:
+        acceptance_ratio = round((accepted_college_applications / total_college_applications) * 100, 2)
+    else:
+        acceptance_ratio = 0  # Prevent division by zero
 
-# def load_sample_candidates():
-#     try:
-#         for candidate_data in sample_candidates:
-#             Candidate.objects.get_or_create(**candidate_data)
-#     except IntegrityError:
-#         pass  # Ignore errors if the data already exists
+    # Calculate acceptance ratio per candidate
+    candidate_acceptance_ratios = []
+    for candidate in Candidate.objects.all():
+        candidate_applications = candidate.applications.count()  # Total applications per candidate
+        candidate_accepted = candidate.applications.filter(application_status="accepted").count()
 
-# # Load candidates when the server starts
-# load_sample_candidates()
+        if candidate_applications > 0:
+            candidate_ratio = round((candidate_accepted / candidate_applications) * 100, 2)
+        else:
+            candidate_ratio = 0  # No applications
+
+        candidate_acceptance_ratios.append({
+            "name": candidate.name,
+            "total_applications": candidate_applications,
+            "accepted_applications": candidate_accepted,
+            "acceptance_ratio": candidate_ratio
+        })
+
+    context = {
+        "total_candidates": total_candidates,
+        "total_college_applications": total_college_applications,
+        "accepted_college_applications": accepted_college_applications,
+        "rejected_college_applications": rejected_college_applications,
+        "pending_college_applications": pending_college_applications,
+        "waitlisted_college_applications": waitlisted_college_applications,
+        "acceptance_ratio": acceptance_ratio,
+        "candidate_acceptance_ratios": candidate_acceptance_ratios
+    }
+    
+    return render(request, "statistics.html", context)

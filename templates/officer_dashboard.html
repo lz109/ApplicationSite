@@ -19,7 +19,8 @@
             </ul>
         </nav>
     </header>
-
+<h3>View Statistics</h3>
+<a href="{% url 'statistics' %}" class="btn btn-info">Candidate Statistics for 2025</a>
 <!-- Upload Candidate Document -->
 <h3>Upload Candidate Document</h3>
 <form method="POST" enctype="multipart/form-data">
@@ -88,7 +89,15 @@
     </div>
     
     <button type="button" onclick="addCollege()">Add Another College</button>
-
+    <h4>Select Assigned Staff</h4>
+        <select name="officer" required>
+            <option value="">-- Select a Staff --</option>
+            {% for officer in officers %}
+                <option value="{{ officer.id }}">{{ officer.username }} ({{ officer.email }})</option>
+            {% empty %}
+                <option value="" disabled>No officers available</option>
+            {% endfor %}
+        </select>
     <button type="submit">Add Candidate</button>
 </form>
 
@@ -264,7 +273,16 @@
     </td>
     <td>{{ candidate.email }}</td>
     <td>{{ candidate.get_program_fit_display }}</td>
-    <td>{{ candidate.gpa }}</td>
+    <td>
+        <span 
+            {% if candidate.gpa > 3.7 %}
+                style="color: green; font-weight: bold;"
+            {% elif candidate.gpa < 2.5 %}
+                style="color: red; font-weight: bold;"
+            {% endif %}
+        >
+            {{ candidate.gpa }}
+        </span>
     <td>
         <table class="table table-bordered">
             <thead>

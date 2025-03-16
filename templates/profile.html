@@ -15,5 +15,6 @@
 <p><strong>Job Title:</strong> {{ user.job_title }}</p>
 <p><strong>Contact Details:</strong> {{ user.contact_details }}</p>
 
-<a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+<a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a><br>
+<a href="{% url 'officer_dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
 {% endblock %}

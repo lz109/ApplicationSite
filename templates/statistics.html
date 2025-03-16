@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Statistics</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    {% block content %}
+    <h2>Application Statistics</h2>
+
+    <div>
+        <p><strong>Total Candidates:</strong> {{ total_candidates }}</p>
+        <p><strong>Total College Applications:</strong> {{ total_college_applications }}</p>
+        <p><strong>Accepted Applications:</strong> {{ accepted_college_applications }}</p>
+        <p><strong>Rejected Applications:</strong> {{ rejected_college_applications }}</p>
+        <p><strong>Pending Applications:</strong> {{ pending_college_applications }}</p>
+        <p><strong>Waitlisted Applications:</strong> {{ waitlisted_college_applications }}</p>
+        <p><strong>Overall Acceptance Ratio:</strong> {{ acceptance_ratio }}%</p>
+    </div>
+
+    <h3>Candidate Acceptance Ratios</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Total Applications</th>
+                <th>Accepted Applications</th>
+                <th>Acceptance Ratio (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for candidate in candidate_acceptance_ratios %}
+            <tr>
+                <td>{{ candidate.name }}</td>
+                <td>{{ candidate.total_applications }}</td>
+                <td>{{ candidate.accepted_applications }}</td>
+                <td>{{ candidate.acceptance_ratio }}%</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No candidates have applied yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <canvas id="statusChart" width="400" height="200"></canvas>
+
+    <script>
+        var ctx = document.getElementById('statusChart').getContext('2d');
+        var statusChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Accepted', 'Rejected', 'Pending', 'Waitlisted'],
+                datasets: [{
+                    label: 'Number of Applications',
+                    data: [{{ accepted_college_applications }}, {{ rejected_college_applications }}, {{ pending_college_applications }}, {{ waitlisted_college_applications }}],
+                    backgroundColor: ['green', 'red', 'orange', 'blue'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+    <a href="{% url 'officer_dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+
+    {% endblock %}
+</body>
+</html>

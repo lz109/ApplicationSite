@@ -1,7 +1,7 @@
 from django.urls import path 
 from .views import home, signup, signin, signout, dashboard, admin_dashboard, officer_dashboard, view_profile, update_candidate_status, send_message, message_page
 from .views import create_event, invite_candidate_to_event, edit_profile, add_officer, remove_officer, upload_document, add_candidate, candidate_profile, edit_candidate
-from .views import send_message_to_user  
+from .views import send_message_to_user, statistics_view
 urlpatterns = [ 
     path("", home, name="home"), 
     path("signup/", signup, name="signup"),
@@ -26,4 +26,5 @@ urlpatterns = [
     path('candidate/<int:candidate_id>/', candidate_profile, name='candidate_profile'),
     path('candidate/<int:candidate_id>/edit/', edit_candidate, name='edit_candidate'),  # New Edit Page
     path('send-message-to-user/', send_message_to_user, name='send_message_to_user'),
+    path("statistics/", statistics_view, name="statistics"),
 ]
