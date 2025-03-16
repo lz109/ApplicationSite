@@ -85,9 +85,15 @@ def is_officer(user):
     return user.role == "officer"
 
 @login_required
-@user_passes_test(is_admin)
+@user_passes_test(lambda u: u.role == "admin")
 def admin_dashboard(request):
-    return render(request, "admin_dashboard.html")
+    officers = User.objects.filter(role="officer").prefetch_related("candidates")  # Fetch all officers with their candidates
+    logs = ActivityLog.objects.all()
+
+    return render(request, "admin_dashboard.html", {
+        "officers": officers,
+        "logs": logs,
+    })
 
 def normalize_text(text):
     """Normalize text by removing spaces, underscores, and converting to lowercase."""
@@ -497,7 +503,9 @@ def upload_document(request):
                     "officer": request.user  # Assign to logged-in officer
                 }
             )
-
+            if not created and candidate.officer is None:
+                candidate.officer = request.user
+                candidate.save()
             if created:
                 messages.success(request, "Candidate details extracted and saved successfully!")
             else:
@@ -530,7 +538,7 @@ def upload_document(request):
     else:
         form = DocumentUploadForm()
 
-    return render(request, "upload_document.html", {"form": form})
+    return render(request, "officer_dashboard.html", {"form": form})
 
 
 @login_required

@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +7,7 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="{% static 'styles/style.css' %}">
 </head>
+<body>
     <header>
         <h1>Welcome, Admin: {{ user.username }}</h1>
         <nav>
@@ -17,41 +17,73 @@
             </ul>
         </nav>
     </header>
-<!-- Add Officer Button -->
-<a href="{% url 'add_officer' %}" class="btn btn-success">Add New Officer</a>
 
-<h3>Officer Accounts</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for officer in officers %}
-        <tr>
-            <td>{{ officer.username }}</td>
-            <td>{{ officer.email }}</td>
-            <td>
-                <a href="{% url 'remove_officer' officer.id %}" class="btn btn-danger">Remove</a>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="3" class="text-center">No officers available.</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <!-- Add Officer Button -->
+    <a href="{% url 'add_officer' %}" class="btn btn-success">Add New Officer</a>
 
+    <h3>Officer Accounts</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for officer in officers %}
+            <tr>
+                <td>{{ officer.username }}</td>
+                <td>{{ officer.email }}</td>
+                <td>
+                    <a href="{% url 'remove_officer' officer.id %}" class="btn btn-danger">Remove</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">No officers available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-<h3>Officer Activity Logs</h3>
-<div style="max-height: 300px; overflow-y: auto; background: #f8f9fa; padding: 10px; border-radius: 5px;">
-    {% for log in logs %}
-        <p><strong>{{ log.officer.username }}</strong> {{ log.action }} on <strong>{{ log.candidate.name }}</strong> at {{ log.timestamp }}</p>
+    <h3>All Candidates by Assigned Officer</h3>
+    {% for officer in officers %}
+        <h4>{{ officer.username }} ({{ officer.email }})</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for candidate in officer.candidates.all %}
+                <tr>
+                    <td>{{ candidate.name }}</td>
+                    <td>{{ candidate.email }}</td>
+                    
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">No candidates assigned.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% empty %}
-        <p>No recent activity.</p>
+        <p>No officers found.</p>
     {% endfor %}
-</div>
+
+    <h3>Officer Activity Logs</h3>
+    <div style="max-height: 300px; overflow-y: auto; background: #f8f9fa; padding: 10px; border-radius: 5px;">
+        {% for log in logs %}
+            <p><strong>{{ log.officer.username }}</strong> {{ log.action }} on <strong>{{ log.candidate.name }}</strong> at {{ log.timestamp }}</p>
+        {% empty %}
+            <p>No recent activity.</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
