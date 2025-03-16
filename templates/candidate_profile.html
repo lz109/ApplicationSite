@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Officer Dashboard</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+{% block content %}
+<h2>{{ candidate.name }}'s Profile</h2>
+<p><strong>Email:</strong> {{ candidate.email }}</p>
+<p><strong>Program Fit:</strong> {{ candidate.get_program_fit_display }}</p>
+<p><strong>GPA:</strong> {{ candidate.gpa }}</p>
+<p><strong>Shortlisted:</strong> {% if candidate.shortlisted %}Yes{% else %}No{% endif %}</p>
+
+<h3>Colleges Applied</h3>
+<ul>
+    {% for application in candidate.applications.all %}
+    <li>{{ application.college_name }} - {{ application.get_application_status_display }}</li>
+    {% empty %}
+    <li>No applications found</li>
+    {% endfor %}
+</ul>
+
+<h3>Academic Experience</h3>
+<p>{{ candidate.academic_experience }}</p>
+
+<h3>Skills</h3>
+<p>{{ candidate.skills }}</p>
+
+<h3>Projects</h3>
+<p>{{ candidate.projects }}</p>
+<!-- Edit Button -->
+<a href="{% url 'edit_candidate' candidate.id %}" class="btn btn-primary">Edit</a>
+
+<a href="{% url 'officer_dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+{% endblock %}

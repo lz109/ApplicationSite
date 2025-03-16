@@ -13,6 +13,8 @@
         <nav>
             <ul>
                 <li><a href="{% url 'view_profile' %}">My Profile</a></li>
+                <li><a href="{% url 'messages_page' %}">Messages</a></li>
+
                 <li><a href="{% url 'signout' %}">Logout</a></li>
             </ul>
         </nav>
@@ -32,69 +34,87 @@
     <p><strong>Email:</strong> {{ extracted_data.email }}</p>
     <p><strong>GPA:</strong> {{ extracted_data.gpa }}</p>
     <p><strong>Program:</strong> {{ extracted_data.program }}</p>
+    <p><strong>Academic Experience:</strong> {{ extracted_data.academic_experience }}</p>
+    <p><strong>Skills:</strong> {{ extracted_data.skills }}</p>
+    <p><strong>Projects:</strong> {{ extracted_data.projects }}</p>
+    <p><strong>Colleges applied:</strong> {{ extracted_data.colleges_applied }}</p>
 {% endif %}
 
-<!-- Add New Candidate Form -->
-<div class="container mt-4">
-    <h3>Add New Candidate</h3>
-    <form method="POST" action="{% url 'add_candidate' %}">
-        {% csrf_token %}
+<h3>Add New Candidate</h3>
+<form method="POST" action="{% url 'add_candidate' %}">
+    {% csrf_token %}
 
-        <div class="mb-3">
-            <label for="name" class="form-label">Full Name:</label>
-            <input type="text" class="form-control" id="name" name="name" required>
-        </div>
+    <label for="name">Full Name:</label>
+    <input type="text" name="name" required>
 
-        <div class="mb-3">
-            <label for="email" class="form-label">Email:</label>
-            <input type="email" class="form-control" id="email" name="email" required>
-        </div>
+    <label for="email">Email:</label>
+    <input type="email" name="email" required>
 
-        <div class="mb-3">
-            <label for="program_fit" class="form-label">Program Fit:</label>
-            <select name="program_fit" id="program_fit" class="form-select" required>
-                <optgroup label="Engineering">
-                    <option value="civil engineering">Civil Engineering</option>
-                    <option value="mechanical engineering">Mechanical Engineering</option>
-                    <option value="electrical engineering">Electrical Engineering</option>
-                    <option value="computer engineering">Computer Engineering</option>
-                    <option value="chemical engineering">Chemical Engineering</option>
-                    <option value="biomedical engineering">Biomedical Engineering</option>
-                    <option value="aerospace engineering">Aerospace Engineering</option>
-                    <option value="industrial engineering">Industrial Engineering</option>
-                    <option value="software engineering">Software Engineering</option>
-                </optgroup>
-                <option value="math">Math</option>
-                <option value="science">Science</option>
-                <option value="business">Business</option>
-                <option value="arts">Arts</option>
-            </select>
-        </div>
+    <label for="program_fit">Program Fit:</label>
+    <select name="program_fit" required>
+        <option value="civil_engineering">Civil Engineering</option>
+        <option value="mechanical_engineering">Mechanical Engineering</option>
+        <option value="electrical_engineering">Electrical Engineering</option>
+        <option value="computer_engineering">Computer Engineering</option>
+        <option value="chemical_engineering">Chemical Engineering</option>
+        <option value="biomedical_engineering">Biomedical Engineering</option>
+        <option value="aerospace_engineering">Aerospace Engineering</option>
+        <option value="industrial_engineering">Industrial Engineering</option>
+        <option value="software_engineering">Software Engineering</option>
+        <option value="math">Math</option>
+        <option value="science">Science</option>
+        <option value="business">Business</option>
+        <option value="arts">Arts</option>
+    </select>
 
-        <div class="mb-3">
-            <label for="gpa" class="form-label">GPA:</label>
-            <input type="number" class="form-control" id="gpa" name="gpa" step="0.01" min="0" max="4" required>
-        </div>
+    <label for="gpa">GPA:</label>
+    <input type="number" name="gpa" step="0.01" min="0" max="4" required>
 
-        <div class="mb-3">
-            <label for="application_status" class="form-label">Application Status:</label>
-            <select name="application_status" id="application_status" class="form-select" required>
+    <label for="shortlisted">
+        <input type="checkbox" name="shortlisted"> Shortlisted
+    </label>
+
+    <h4>Colleges Applied</h4>
+    <div id="college-container">
+        <div class="college-entry">
+            <input type="text" name="college_name[]" placeholder="College Name" required>
+            <select name="application_status[]" required>
                 <option value="pending">Pending</option>
                 <option value="accepted">Accepted</option>
                 <option value="rejected">Rejected</option>
                 <option value="waitlisted">Waitlisted</option>
             </select>
         </div>
+    </div>
+    
+    <button type="button" onclick="addCollege()">Add Another College</button>
 
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="shortlisted" name="shortlisted">
-            <label class="form-check-label" for="shortlisted">Shortlisted</label>
-        </div>
+    <button type="submit">Add Candidate</button>
+</form>
 
-        <button type="submit" class="btn btn-primary mt-3">Add Candidate</button>
-    </form>
+<script>
+    function addCollege() {
+        var container = document.getElementById("college-container");
+        var newEntry = document.createElement("div");
+        newEntry.classList.add("college-entry");
+        newEntry.innerHTML = `
+            <input type="text" name="college_name[]" placeholder="College Name" required>
+            <select name="application_status[]" required>
+                <option value="pending">Pending</option>
+                <option value="accepted">Accepted</option>
+                <option value="rejected">Rejected</option>
+                <option value="waitlisted">Waitlisted</option>
+            </select>
+            <button type="button" onclick="removeCollege(this)">Remove</button>
+        `;
+        container.appendChild(newEntry);
+    }
 
-</div>
+    function removeCollege(button) {
+        button.parentElement.remove();
+    }
+</script>
+
 
 <!-- Events Section -->
 <h3>Upcoming Event Calendar</h3>
@@ -158,44 +178,46 @@
         {% endfor %}
     </select>
 
-    <label for="candidate">Select Candidate:</label>
-    <select name="candidate_id" class="form-select mb-2" required>
-        <option value="" disabled selected>Choose a candidate</option>
+    <label for="candidates">Select Candidates:</label>
+    <select name="candidate_ids[]" class="form-select mb-2" multiple required>
         {% for candidate in candidates %}
         <option value="{{ candidate.id }}">{{ candidate.name }} - {{ candidate.email }}</option>
         {% endfor %}
     </select>
-
-    <button type="submit" class="btn btn-primary">Invite Candidate</button>
+    <button type="submit" class="btn btn-primary mt-2">Invite</button>
+    <small>Hold Ctrl to select multiple candidates.</small>
 </form>
 
 
-    <h3>Filter Candidates</h3>
+<h3>All Candidates</h3>
+<!-- Filter -->
 <form method="get" class="mb-3">
     <div class="row">
         <!-- Program Fit Filter -->
-        <div class="col-md-4">
-            <label for="program_fit">Program Fit:</label>
-            <select name="program_fit" class="form-select">
-                <option value="">All</option>
-                <optgroup label="Engineering">
-                    <option value="civil engineering" {% if request.GET.program_fit == "civil engineering" %}selected{% endif %}>Civil Engineering</option>
-                    <option value="mechanical engineering" {% if request.GET.program_fit == "mechanical engineering" %}selected{% endif %}>Mechanical Engineering</option>
-                    <option value="electrical engineering" {% if request.GET.program_fit == "electrical engineering" %}selected{% endif %}>Electrical Engineering</option>
-                    <option value="computer engineering" {% if request.GET.program_fit == "computer engineering" %}selected{% endif %}>Computer Engineering</option>
-                    <option value="chemical engineering" {% if request.GET.program_fit == "chemical engineering" %}selected{% endif %}>Chemical Engineering</option>
-                    <option value="biomedical engineering" {% if request.GET.program_fit == "biomedical engineering" %}selected{% endif %}>Biomedical Engineering</option>
-                    <option value="aerospace engineering" {% if request.GET.program_fit == "aerospace engineering" %}selected{% endif %}>Aerospace Engineering</option>
-                    <option value="industrial engineering" {% if request.GET.program_fit == "industrial engineering" %}selected{% endif %}>Industrial Engineering</option>
-                    <option value="software engineering" {% if request.GET.program_fit == "software engineering" %}selected{% endif %}>Software Engineering</option>
-                </optgroup>
-                <option value="math" {% if request.GET.program_fit == "math" %}selected{% endif %}>Math</option>
-                <option value="science" {% if request.GET.program_fit == "science" %}selected{% endif %}>Science</option>
-                <option value="business" {% if request.GET.program_fit == "business" %}selected{% endif %}>Business</option>
-                <option value="arts" {% if request.GET.program_fit == "arts" %}selected{% endif %}>Arts</option>
-            </select>
-        </div>
+    <div class="col-md-4">
+        <label for="program_fit">Program Fit:</label>
+        <select name="program_fit" class="form-select">
+            <option value="">All</option>
+            <optgroup label="Engineering">
+                <option value="civil_engineering" {% if program_fit_filter|lower == "civilengineering"|lower %}selected{% endif %}>Civil Engineering</option>
+                <option value="mechanical_engineering" {% if program_fit_filter|lower == "mechanicalengineering"|lower %}selected{% endif %}>Mechanical Engineering</option>
+                <option value="electrical_engineering" {% if program_fit_filter|lower == "electricalengineering"|lower %}selected{% endif %}>Electrical Engineering</option>
+                <option value="computer_engineering" {% if program_fit_filter|lower == "computerengineering"|lower %}selected{% endif %}>Computer Engineering</option>
+                <option value="chemical_engineering" {% if program_fit_filter|lower == "chemicalengineering"|lower %}selected{% endif %}>Chemical Engineering</option>
+                <option value="biomedical_engineering" {% if program_fit_filter|lower == "biomedicalengineering"|lower %}selected{% endif %}>Biomedical Engineering</option>
+                <option value="aerospace_engineering" {% if program_fit_filter|lower == "aerospaceengineering"|lower %}selected{% endif %}>Aerospace Engineering</option>
+                <option value="industrial_engineering" {% if program_fit_filter|lower == "industrialengineering"|lower %}selected{% endif %}>Industrial Engineering</option>
+                <option value="software_engineering" {% if program_fit_filter|lower == "softwareengineering"|lower %}selected{% endif %}>Software Engineering</option>
+            </optgroup>
+            <option value="math" {% if program_fit_filter|lower == "math"|lower %}selected{% endif %}>Math</option>
+            <option value="science" {% if program_fit_filter|lower == "science"|lower %}selected{% endif %}>Science</option>
+            <option value="business" {% if program_fit_filter|lower == "business"|lower %}selected{% endif %}>Business</option>
+            <option value="arts" {% if program_fit_filter|lower == "arts"|lower %}selected{% endif %}>Arts</option>
+        </select>
+    </div>
 
+        <label for="college_name">College Applied:</label>
+        <input type="text" name="college_name" placeholder="Enter college name" value="{{ college_filter }}">
 
         <!-- Application Status Filter -->
         <div class="col-md-4">
@@ -223,10 +245,6 @@
     <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
 </form>
 
-<h3>All Candidates</h3>
-<!-- Link to Messages Page -->
-<a href="{% url 'messages_page' %}" class="btn btn-info mb-3">View Messages</a>
-
 <table class="table">
     <thead>
         <tr>
@@ -234,27 +252,53 @@
             <th>Email</th>
             <th>Program Fit</th>
             <th>GPA</th>
-            <th>Application Status</th>
+            <th>Colleges Applied & Status</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         {% for candidate in candidates %}
 <tr>
-    <td>{{ candidate.name }}</td>
+    <td>
+        <a href="{% url 'candidate_profile' candidate.id %}">{{ candidate.name }}</a>
+    </td>
     <td>{{ candidate.email }}</td>
     <td>{{ candidate.get_program_fit_display }}</td>
     <td>{{ candidate.gpa }}</td>
     <td>
-        <form method="post" action="{% url 'update_candidate_status' candidate.id %}">
-            {% csrf_token %}
-            <select name="application_status" class="form-select">
-                <option value="pending" {% if candidate.application_status == "pending" %}selected{% endif %}>Pending</option>
-                <option value="accepted" {% if candidate.application_status == "accepted" %}selected{% endif %}>Accept</option>
-                <option value="rejected" {% if candidate.application_status == "rejected" %}selected{% endif %}>Reject</option>
-            </select>
-            <button type="submit" class="btn btn-sm btn-primary mt-1">Update</button>
-        </form>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>College Name</th>
+                    <th>Application Status</th>
+                    <th>Update Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for application in candidate.applications.all %}
+                <tr>
+                    <td>{{ application.college_name }}</td>
+                    <td>{{ application.get_application_status_display }}</td>
+                    <td>
+                        <form method="post" action="{% url 'update_candidate_status' application.id %}">
+                            {% csrf_token %}
+                            <select name="application_status" class="form-select">
+                                <option value="pending" {% if application.application_status == "pending" %}selected{% endif %}>Pending</option>
+                                <option value="accepted" {% if application.application_status == "accepted" %}selected{% endif %}>Accepted</option>
+                                <option value="rejected" {% if application.application_status == "rejected" %}selected{% endif %}>Rejected</option>
+                                <option value="waitlisted" {% if application.application_status == "waitlisted" %}selected{% endif %}>Waitlisted</option>
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-primary mt-1">Update</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No applications found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </td>
     <td>
         <form method="post" action="{% url 'send_message' %}">

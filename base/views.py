@@ -3,7 +3,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import RegisterForm, SignInForm
 from .models import User
-from .models import Candidate, Message, Event, ActivityLog
+from .models import Candidate, Message, Event, ActivityLog, CollegeApplication
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import UserProfileForm
 from django.shortcuts import render, redirect, get_object_or_404
@@ -89,24 +89,33 @@ def is_officer(user):
 def admin_dashboard(request):
     return render(request, "admin_dashboard.html")
 
+def normalize_text(text):
+    """Normalize text by removing spaces, underscores, and converting to lowercase."""
+    return re.sub(r'[\s_]+', '', text).lower()
+
 @login_required
 @user_passes_test(is_officer)
 def officer_dashboard(request):
     program_fit_filter = request.GET.get("program_fit", "")
     application_status_filter = request.GET.get("application_status", "")
+    college_filter = request.GET.get("college_name", "")
     score_sort = request.GET.get("score_sort", "")
 
     candidates = Candidate.objects.all()
     events = Event.objects.all().order_by("-date")
 
     if program_fit_filter:
-        candidates = candidates.filter(program_fit__iexact=program_fit_filter)
+        normalized_filter = normalize_text(program_fit_filter)
+        candidates = candidates.filter(program_fit__iexact=normalized_filter)
+
     if application_status_filter:
-        candidates = candidates.filter(application_status=application_status_filter)
+        candidates = candidates.filter(applications__application_status=application_status_filter)
+    if college_filter:
+        candidates = candidates.filter(applications__college_name__icontains=college_filter).distinct()
     if score_sort == "high_to_low":
-        candidates = candidates.order_by(F("scores").desc())
+        candidates = candidates.order_by(F("gpa").desc())
     elif score_sort == "low_to_high":
-        candidates = candidates.order_by(F("scores").asc())
+        candidates = candidates.order_by(F("gpa").asc())
 
     # Handle file upload
     extracted_data = None
@@ -172,24 +181,24 @@ def officer_dashboard(request):
 @login_required
 @user_passes_test(is_officer)
 def update_candidate_status(request, candidate_id):
-    candidate = get_object_or_404(Candidate, id=candidate_id)
+    application = get_object_or_404(CollegeApplication, id=candidate_id)
 
     if request.method == "POST":
-        new_status = request.POST.get("application_status")  # Get new_status from form
+        new_status = request.POST.get("application_status")  # Get new status from form
 
-        if new_status in ["pending", "accepted", "rejected"]:
-            old_status = candidate.application_status
-            candidate.application_status = new_status
-            candidate.save()
+        if new_status in ["pending", "accepted", "rejected", "waitlisted"]:
+            old_status = application.application_status
+            application.application_status = new_status
+            application.save()
 
             # Log the officer's action
             ActivityLog.objects.create(
                 officer=request.user,
-                action=f"changed status from {old_status} to {new_status}",
-                candidate=candidate
+                action=f"changed {application.college_name} status from {old_status} to {new_status}",
+                candidate=application.candidate
             )
 
-            messages.success(request, f"Candidate {candidate.name} status updated to {new_status}.")
+            messages.success(request, f"Application status for {application.college_name} updated to {new_status}.")
         else:
             messages.error(request, "Invalid status selected.")
 
@@ -208,10 +217,58 @@ def send_message(request):
     return redirect("officer_dashboard")
 
 @login_required
+def send_message_to_user(request):
+    if request.method == "POST":
+        recipient_email = request.POST.get("recipient_email").strip()
+        content = request.POST.get("content").strip()
+
+        if not content:
+            messages.error(request, "Message content cannot be empty.")
+            return redirect("messages_page")
+
+        if not recipient_email:
+            messages.error(request, "Please select a recipient.")
+            return redirect("messages_page")
+
+        # Ensure the recipient exists in the system
+        recipient = User.objects.filter(email=recipient_email).first()
+        if not recipient:
+            messages.error(request, "Invalid recipient. User does not exist.")
+            return redirect("messages_page")
+
+        # Create and save the message
+        Message.objects.create(sender=request.user, receiver_email=recipient_email, content=content)
+        messages.success(request, f"Message sent to {recipient.username}.")
+
+    return redirect("messages_page")
+
+@login_required
 def message_page(request):
-    messages_received = Message.objects.filter(receiver_email=request.user.email).order_by("-timestamp")
+    users = User.objects.exclude(id=request.user.id)  # Get all users except the logged-in user
+    candidates = Candidate.objects.all()  # Get all candidates
+
+    # Messages sent by the logged-in officer/admin
     messages_sent = Message.objects.filter(sender=request.user).order_by("-timestamp")
-    return render(request, "messages.html", {"messages_received": messages_received, "messages_sent": messages_sent})
+
+    # Messages received by the logged-in officer/admin
+    messages_received = Message.objects.filter(receiver_email=request.user.email).order_by("-timestamp")
+
+    # Separate messages between officers and between candidates
+    officer_sent_messages = messages_sent.filter(receiver_email__in=users.values_list('email', flat=True))
+    candidate_sent_messages = messages_sent.exclude(receiver_email__in=users.values_list('email', flat=True))
+
+    officer_received_messages = messages_received.filter(sender__in=users)
+    candidate_received_messages = messages_received.exclude(sender__in=users)
+
+    return render(request, "messages.html", {
+        "users": users,
+        "candidates": candidates,
+        "officer_sent_messages": officer_sent_messages,
+        "candidate_sent_messages": candidate_sent_messages,
+        "officer_received_messages": officer_received_messages,
+        "candidate_received_messages": candidate_received_messages,
+    })
+
 
 @login_required
 def dashboard(request):
@@ -236,13 +293,20 @@ def create_event(request):
 def invite_candidate_to_event(request):
     if request.method == "POST":
         event_id = request.POST.get("event_id")
-        candidate_id = request.POST.get("candidate_id")
+        candidate_ids = request.POST.getlist("candidate_ids[]")  # Get multiple selected candidates
 
         event = get_object_or_404(Event, id=event_id)
-        candidate = get_object_or_404(Candidate, id=candidate_id)
 
-        event.members.add(candidate)
-        messages.success(request, f"{candidate.name} has been invited to {event.title}.")
+        invited_candidates = []
+        for candidate_id in candidate_ids:
+            candidate = get_object_or_404(Candidate, id=candidate_id)
+            event.members.add(candidate)  # Add candidate to event
+            invited_candidates.append(candidate.name)
+
+        if invited_candidates:
+            messages.success(request, f"Invited {', '.join(invited_candidates)} to {event.title}.")
+        else:
+            messages.warning(request, "No candidates were selected.")
 
     return redirect("officer_dashboard")
 
@@ -332,31 +396,52 @@ def extract_text_from_pdf(file_path):
     return text
 
 import re
+import re
+
+def find_match(pattern, text):
+    """Utility function to find a regex match or return 'Not Found'."""
+    match = re.search(pattern, text, re.IGNORECASE)
+    if match:
+        try:
+            return match.group(1).strip()
+        except IndexError:
+            print(f"IndexError: No group(1) found for pattern: {pattern} in text:\n{text}")
+            return "Not Found"
+    else:
+        print(f"Pattern not found: {pattern} in text:\n{text}")
+        return "Not Found"
 
 def process_extracted_text(text):
-    # Find email
-    email_match = re.search(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+", text)
-    email = email_match.group(0) if email_match else "Not Found"
+    """ Extracts candidate information from resume text using regex. """
+    name = find_match(r"Name[:\-\s]+([A-Z][a-zA-Z]+(?:\s[A-Z][a-zA-Z]+)*)\b(?!\s*Email)", text)
 
-    # Find GPA 
-    gpa_match = re.search(r"GPA[:\-\s]+(\d\.\d)", text, re.IGNORECASE)
-    gpa = gpa_match.group(1) if gpa_match else "Not Found"
+    # Extract Email (More flexible email regex)
+    email = find_match(r"Email[:\-\s]*([\w\.-]+@[\w\.-]+\.\w+)", text)
 
-    # Find program 
-    program_match = re.search(r"Program[:\-\s]+([\w\s]+)", text, re.IGNORECASE)
-    program = program_match.group(1).strip() if program_match else "Not Found"
+    # Extract GPA (Handles GPA variations like "GPA: 3.8" or "GPA - 3.80")
+    gpa = find_match(r"GPA[:\-\s]+(\d+\.\d+)", text)
 
-    # Find full name
-    name_match = re.search(r"Name[:\-\s]+([A-Z][a-z]+(?:\s[A-Z][a-z]+)*)\n", text)
-    name = name_match.group(1) if name_match else "Not Found"
+    # Extract Program (Handles "Program Fit: Engineering" and similar)
+    program = find_match(r"Program(?:\s*Fit)?[:\-\s]+([A-Za-z\s]+?)\b", text)
+
+    # Extract Academic Experience, Skills, and Projects
+    academic_experience = find_match(r"Academic Experience[:\-\s]+([\w\W]+?)(?:Skills|Projects|Colleges|Applied|Application Status|$)", text)
+    skills = find_match(r"Skills[:\-\s]+([\w\W]+?)(?:Projects|Colleges|Applied|Application Status|$)", text)
+    projects = find_match(r"Projects[:\-\s]+([\w\W]+?)(?:Colleges|Applied|Application Status|$)", text)
+
+    # Extract Colleges Applied (fixes duplicate issues & captures comma-separated values correctly)
+    colleges_applied = find_match(r"(?:Colleges Applied|Colleges|Applications)[:\-\s]+([A-Z][a-zA-Z\s]+(?:,\s*[A-Z][a-zA-Z\s]+)*)", text)
 
     return {
         "name": name,
         "email": email,
         "gpa": gpa,
-        "program": program
+        "program": program,
+        "academic_experience": academic_experience,
+        "skills": skills,
+        "projects": projects,
+        "colleges_applied": colleges_applied
     }
-
 
 def extract_text_from_docx(file_path):
     text = ""
@@ -364,6 +449,7 @@ def extract_text_from_docx(file_path):
     for para in doc.paragraphs:
         text += para.text + "\n"
     return text
+
 
 
 @login_required
@@ -403,7 +489,10 @@ def upload_document(request):
                 defaults={
                     "name": extracted_data["name"],
                     "gpa": gpa_value,
-                    "program_fit": extracted_data["program"]
+                    "program_fit": extracted_data["program"],
+                    "academic_experience": extracted_data["academic_experience"],
+                    "skills": extracted_data["skills"],
+                    "projects": extracted_data["projects"]
                 }
             )
 
@@ -412,8 +501,30 @@ def upload_document(request):
             else:
                 messages.info(request, "Candidate already exists. No duplicate entry created.")
 
-            return render(request, "upload_document.html", {"form": form, "extracted_text": extracted_text, "processed_data": extracted_data})
+            # Process colleges applied
+            college_names = extracted_data.get("colleges_applied", "").split(",")  # Assuming a comma-separated list
+            
+            for college_name in map(str.strip, college_names):
+                if college_name:
+                    # Check if application already exists for this candidate and college
+                    existing_application = CollegeApplication.objects.filter(
+                        candidate=candidate, college_name=college_name
+                    ).exists()
 
+                    if not existing_application:
+                        CollegeApplication.objects.create(
+                            candidate=candidate, college_name=college_name, application_status="pending"
+                        )
+            candidates = Candidate.objects.all()  # Fetch all candidates
+            applications = CollegeApplication.objects.all()  # Fetch all applications
+
+            return render(request, "officer_dashboard.html", {
+                "form": form,
+                "extracted_text": extracted_text,
+                "processed_data": extracted_data,
+                "candidates": candidates,  # Pass updated candidate list
+                "applications": applications,  # Pass updated college applications
+            })
     else:
         form = DocumentUploadForm()
 
@@ -426,28 +537,91 @@ def add_candidate(request):
         email = request.POST.get("email")
         program_fit = request.POST.get("program_fit")
         gpa = request.POST.get("gpa")
-        application_status = request.POST.get("application_status")
         shortlisted = request.POST.get("shortlisted") == "on"  # Convert checkbox to boolean
+        academic_experience = request.POST.get("academic_experience", "").strip()
+        skills = request.POST.get("skills", "").strip()
+        projects = request.POST.get("projects", "").strip()
 
-        # Check if email already exists (to prevent duplicates)
+        # Extract multiple colleges and statuses from the form
+        college_names = request.POST.getlist("college_name[]")  # Get list of college names
+        application_statuses = request.POST.getlist("application_status[]")  # Get list of statuses
+
+        # Check if the candidate already exists
         if Candidate.objects.filter(email=email).exists():
             messages.error(request, "A candidate with this email already exists.")
-            return redirect("officer_dashboard")  # Redirect back to the form
+            return redirect("officer_dashboard")
 
-        # Create new candidate
-        Candidate.objects.create(
+        # Create a new candidate
+        candidate = Candidate.objects.create(
             name=name,
             email=email,
             program_fit=program_fit,
             gpa=gpa,
-            application_status=application_status,
-            shortlisted=shortlisted
+            shortlisted=shortlisted,
+            academic_experience=academic_experience,
+            skills=skills,
+            projects=projects
         )
 
-        messages.success(request, "Candidate added successfully!")
+        # Create CollegeApplication entries for each selected college
+        for college_name, application_status in zip(college_names, application_statuses):
+            CollegeApplication.objects.create(
+                candidate=candidate,
+                college_name=college_name.strip(),
+                application_status=application_status
+            )
+
+        messages.success(request, "Candidate and applications added successfully!")
         return redirect("officer_dashboard")  # Redirect after successful submission
 
     return render(request, "officer_dashboard.html")
+
+def candidate_profile(request, candidate_id):
+    candidate = get_object_or_404(Candidate, id=candidate_id)
+    return render(request, "candidate_profile.html", {"candidate": candidate})
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from .models import Candidate, CollegeApplication
+
+def edit_candidate(request, candidate_id):
+    candidate = get_object_or_404(Candidate, id=candidate_id)
+
+    if request.method == "POST":
+        # Update candidate details
+        candidate.name = request.POST.get("name", "").strip()
+        candidate.email = request.POST.get("email", "").strip()
+        candidate.program_fit = request.POST.get("program_fit", "").strip()
+        
+        # Ensure GPA is correctly handled (convert to float, default to 0.0 if invalid)
+        try:
+            candidate.gpa = float(request.POST.get("gpa", candidate.gpa))
+        except ValueError:
+            candidate.gpa = candidate.gpa  # Keep existing GPA if input is invalid
+
+        candidate.academic_experience = request.POST.get("academic_experience", "").strip()
+        candidate.skills = request.POST.get("skills", "").strip()
+        candidate.projects = request.POST.get("projects", "").strip()
+        candidate.save()
+
+        # Update college applications
+        college_names = request.POST.getlist("college_name[]")  # List of colleges
+        application_statuses = request.POST.getlist("application_status[]")  # List of statuses
+
+        # Remove old applications and add new ones
+        candidate.applications.all().delete()
+        for college_name, application_status in zip(college_names, application_statuses):
+            if college_name.strip():  # Ensure not empty
+                CollegeApplication.objects.create(
+                    candidate=candidate,
+                    college_name=college_name.strip(),
+                    application_status=application_status.strip()
+                )
+
+        messages.success(request, "Candidate details updated successfully!")
+        return redirect("candidate_profile", candidate_id=candidate.id)
+
+    return render(request, "edit_candidate.html", {"candidate": candidate})
 
 
 # from django.db.utils import IntegrityError

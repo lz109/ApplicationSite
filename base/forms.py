@@ -21,7 +21,7 @@ class UserProfileForm(forms.ModelForm):
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["email", "job_title"]\
+        fields = ["email", "job_title"]
         
 class AddOfficerForm(UserCreationForm):
     email = forms.EmailField(required=True)

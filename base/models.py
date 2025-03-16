@@ -57,12 +57,32 @@ class Candidate(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     program_fit = models.CharField(max_length=50, choices=PROGRAM_CHOICES, default='engineering')
-    gpa = models.IntegerField()
+    gpa = models.FloatField(default=0.0)
     application_status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="pending")
     shortlisted = models.BooleanField(default=False)
 
+    academic_experience = models.TextField(blank=True, null=True)  # Education & coursework
+    skills = models.TextField(blank=True, null=True)  # List of technical & soft skills
+    projects = models.TextField(blank=True, null=True)
+
     def __str__(self):
         return self.name
+
+
+class CollegeApplication(models.Model):
+    STATUS_CHOICES = (
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected'),
+        ('waitlisted', 'Waitlisted'),
+    )
+
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name="applications")
+    college_name = models.CharField(max_length=255)
+    application_status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="pending")
+
+    def __str__(self):
+        return f"{self.candidate.name} - {self.college_name} ({self.application_status})"
 
 class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
@@ -90,3 +110,4 @@ class ActivityLog(models.Model):
 
     def __str__(self):
         return f'{self.officer.username} {self.action} candidate {self.candidate.name} at {self.timestamp}'
+

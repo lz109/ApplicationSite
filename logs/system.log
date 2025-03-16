@@ -237,3 +237,458 @@ INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloadi
 WARNING:django.request:Not Found: /accounts/login/
 WARNING:django.request:Not Found: /accounts/login/
 WARNING:django.request:Not Found: /accounts/login/
+WARNING:django.request:Not Found: /favicon.ico
+ERROR:django.request:Internal Server Error: /officer_dashboard/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 131, in officer_dashboard
+    extracted_data = process_extracted_text(extracted_text)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 345, in process_extracted_text
+    email = find_match(r"[\w\.-]+@[\w\.-]+\.\w+", text)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 342, in find_match
+    return match.group(1).strip() if match else "Not Found"
+           ^^^^^^^^^^^^^^
+IndexError: no such group
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+WARNING:django.request:Not Found: /favicon.ico
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/models.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/models.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+ERROR:django.request:Internal Server Error: /officer_dashboard/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 164, in officer_dashboard
+    return render(request, "officer_dashboard.html", {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'update_application_status' not found. 'update_application_status' is not a valid view function or pattern name.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+ERROR:django.request:Internal Server Error: /add_candidate/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/fields/__init__.py", line 2123, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: '3.5'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 466, in add_candidate
+    candidate = Candidate.objects.create(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/query.py", line 679, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1835, in execute_sql
+    for sql, params in self.as_sql():
+                       ^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1760, in as_sql
+    self.prepare_value(field, self.pre_save_val(field, obj))
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1699, in prepare_value
+    return field.get_db_prep_save(value, connection=self.connection)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/fields/__init__.py", line 1008, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/fields/__init__.py", line 2130, in get_db_prep_value
+    value = super().get_db_prep_value(value, connection, prepared)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/fields/__init__.py", line 1001, in get_db_prep_value
+    value = self.get_prep_value(value)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/fields/__init__.py", line 2125, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'gpa' expected a number but got '3.5'.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/models.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/models.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+ERROR:django.request:Internal Server Error: /candidate/24/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 498, in candidate_profile
+    return render(request, "candidate_profile.html", {"candidate": candidate})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 573, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 39: 'endblock'. Did you forget to register or load this tag?
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+ERROR:django.request:Internal Server Error: /officer_dashboard/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 173, in officer_dashboard
+    return render(request, "officer_dashboard.html", {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/defaulttags.py", line 199, in render
+    len_values = len(values)
+                 ^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/query.py", line 382, in __len__
+    self._fetch_all()
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1561, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 747, in as_sql
+    extra_select, order_by, group_by = self.pre_sql_setup(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 85, in pre_sql_setup
+    order_by = self.get_order_by()
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 471, in get_order_by
+    resolved = expr.resolve_expression(self.query, allow_joins=True, reuse=None)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/expressions.py", line 294, in resolve_expression
+    expr.resolve_expression(query, allow_joins, reuse, summarize)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/expressions.py", line 895, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/query.py", line 2010, in resolve_ref
+    join_info = self.setup_joins(
+                ^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1863, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1768, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'scores' into field. Choices are: academic_experience, activitylog, application_status, applications, email, event, gpa, id, name, program_fit, projects, shortlisted, skills
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/models.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+ERROR:django.request:Internal Server Error: /messages/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 241, in message_page
+    messages_received = Message.objects.filter(receiver=request.user).order_by("-timestamp")
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1491, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1303, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1768, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'receiver' into field. Choices are: content, id, receiver_email, sender, sender_id, timestamp
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/models.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+ERROR:django.request:Internal Server Error: /send-message/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 215, in send_message
+    Message.objects.create(sender=request.user, receiver_email=candidate.email, content=content, timestamp=now())
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/query.py", line 677, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/base.py", line 567, in __init__
+    raise TypeError(
+TypeError: Message() got unexpected keyword arguments: 'receiver_email'
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/models.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+ERROR:django.request:Internal Server Error: /send-message/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 215, in send_message
+    Message.objects.create(sender=request.user, receiver=candidate.email, content=content, timestamp=now())
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/query.py", line 677, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/base.py", line 543, in __init__
+    _setattr(self, field.name, rel_obj)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 287, in __set__
+    raise ValueError(
+ValueError: Cannot assign "'diana@example.com'": "Message.receiver" must be a "User" instance.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/models.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+ERROR:django.request:Internal Server Error: /send-message/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 215, in send_message
+    Message.objects.create(sender=request.user, receiver=candidate.email, content=content, timestamp=now())
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/query.py", line 677, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/db/models/base.py", line 567, in __init__
+    raise TypeError(
+TypeError: Message() got unexpected keyword arguments: 'receiver'
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.

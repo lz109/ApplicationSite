@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Officer Dashboard - Edit Candidate</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<body>
+    {% block content %}
+    <h2>Edit {{ candidate.name }}'s Details</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <h3>Personal Information</h3>
+        <label for="name">Name:</label>
+        <input type="text" name="name" value="{{ candidate.name }}" required>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" value="{{ candidate.email }}" required>
+
+        <label for="program_fit">Program Fit:</label>
+        <input type="text" name="program_fit" value="{{ candidate.program_fit }}" required>
+
+        <label for="gpa">GPA:</label>
+        <input type="number" step="0.01" name="gpa" value="{{ candidate.gpa }}" required>
+
+        <h3>Colleges Applied</h3>
+        <div id="college-container">
+            {% for application in candidate.applications.all %}
+            <div class="college-entry">
+                <input type="text" name="college_name[]" value="{{ application.college_name }}" required>
+                <select name="application_status[]">
+                    <option value="pending" {% if application.application_status == "pending" %}selected{% endif %}>Pending</option>
+                    <option value="accepted" {% if application.application_status == "accepted" %}selected{% endif %}>Accepted</option>
+                    <option value="rejected" {% if application.application_status == "rejected" %}selected{% endif %}>Rejected</option>
+                    <option value="waitlisted" {% if application.application_status == "waitlisted" %}selected{% endif %}>Waitlisted</option>
+                </select>
+                <button type="button" onclick="removeCollege(this)">Remove</button>
+            </div>
+            {% empty %}
+            <div class="college-entry">
+                <input type="text" name="college_name[]" placeholder="College Name" required>
+                <select name="application_status[]">
+                    <option value="pending">Pending</option>
+                    <option value="accepted">Accepted</option>
+                    <option value="rejected">Rejected</option>
+                    <option value="waitlisted">Waitlisted</option>
+                </select>
+            </div>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addCollege()">Add Another College</button>
+
+        <h3>Academic Experience</h3>
+        <textarea name="academic_experience" rows="4">{{ candidate.academic_experience }}</textarea>
+
+        <h3>Skills</h3>
+        <textarea name="skills" rows="4">{{ candidate.skills }}</textarea>
+
+        <h3>Projects</h3>
+        <textarea name="projects" rows="4">{{ candidate.projects }}</textarea>
+
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <a href="{% url 'candidate_profile' candidate.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+
+    <script>
+        function addCollege() {
+            var container = document.getElementById("college-container");
+            var newEntry = document.createElement("div");
+            newEntry.classList.add("college-entry");
+            newEntry.innerHTML = `
+                <input type="text" name="college_name[]" placeholder="College Name" required>
+                <select name="application_status[]">
+                    <option value="pending">Pending</option>
+                    <option value="accepted">Accepted</option>
+                    <option value="rejected">Rejected</option>
+                    <option value="waitlisted">Waitlisted</option>
+                </select>
+                <button type="button" onclick="removeCollege(this)">Remove</button>
+            `;
+            container.appendChild(newEntry);
+        }
+
+        function removeCollege(button) {
+            button.parentElement.remove();
+        }
+    </script>
+    {% endblock %}
+</body>
+</html>

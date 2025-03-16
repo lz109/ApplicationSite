@@ -232,29 +232,82 @@ h3 {
   color: #666;
   font-style: italic;
 }
-/* Scrollable container with fixed height */
+.centered-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Scrollable Table Container */
 .scrollable-table {
-  max-height: 300px;  /* Limits height */
-  overflow-y: auto;   /* Vertical scrollbar */
-  overflow-x: hidden; /* Prevents horizontal scroll */
+  max-height: 300px;  /* Limit height and enable scrolling */
+  overflow-y: auto;
+  overflow-x: auto; /* Ensures horizontal scrolling if needed */
   border: 1px solid #ddd;
-  padding: 5px;
-  background: #f8f9fa;
-  border-radius: 5px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ensures the container stretches */
 }
-
-/* Limit table width */
+table { 
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Table Styling */
 .fixed-width {
-  width: 300px; /* Set max width */
-  table-layout: fixed; /* Ensures equal column spacing */
-  word-wrap: break-word;
-  white-space: normal;
+  width: 100%;  /* Ensures full width */
+  min-width: 1000px; /* Increases minimum width to ensure columns expand */
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Limit message column width */
-.message-content {
-  max-width: 350px; /* Restrict message column */
-  overflow-wrap: break-word; /* Break long words */
+/* Table Header */
+.fixed-width th {
+  background: #007bff; /* Nice blue header */
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+/* Table Cells */
+.fixed-width td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
   word-wrap: break-word;
-  white-space: normal;
+}
+
+/* Message Column */
+.fixed-width .message-content {
+  white-space: normal; /* Allows wrapping */
+  word-wrap: break-word;
+  max-width: 600px; /* Allows wider messages */
+}
+
+/* Alternating Row Colors */
+.fixed-width tbody tr:nth-child(odd) {
+  background-color: #f9f9f9; /* Light gray for contrast */
+}
+
+/* Hover Effect */
+.fixed-width tbody tr:hover {
+  background-color: #eef5ff; /* Soft blue on hover */
+}
+
+/* Empty Table Message */
+.fixed-width tbody td.text-center {
+  text-align: center;
+  font-style: italic;
+  color: #666;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  .fixed-width {
+      font-size: 14px;
+      min-width: 800px; /* Ensures readability on smaller screens */
+  }
 }

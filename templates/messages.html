@@ -8,61 +8,136 @@
     <link rel="stylesheet" href="{% static 'styles/style.css' %}">
 </head>
 <h2>Messages</h2>
+<div class="centered-table">
+    <h3>Send a Message</h3>
+    <form method="post" action="{% url 'send_message_to_user' %}" class="message-form">
+        {% csrf_token %}
+        
+        <label for="recipient">Select Recipient:</label>
+        <select name="recipient_email" class="form-select mb-2" required>
+            <option value="" disabled selected>Choose a user</option>
+            {% for user in users %}
+                <option value="{{ user.email }}">{{ user.username }} ({{ user.email }})</option>
+            {% endfor %}
+        </select>
 
-<div class="row">
-    <div class="col-md-6">
-        <h3>Received Messages</h3>
-        <div class="scrollable-table">
-            <table class="table fixed-width">
-                <thead>
-                    <tr>
-                        <th>From</th>
-                        <th>Message</th>
-                        <th>Timestamp</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for message in messages_received %}
-                    <tr>
-                        <td>{{ message.sender.username }}</td>
-                        <td class="message-content">{{ message.content }}</td>
-                        <td>{{ message.timestamp }}</td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="3" class="text-center">No messages received.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+        <label for="content">Message:</label>
+        <textarea name="content" class="form-control mb-2" placeholder="Type your message..." required></textarea>
 
-    <div class="col-md-6">
-        <h3>Sent Messages</h3>
-        <div class="scrollable-table">
-            <table class="table fixed-width">
-                <thead>
-                    <tr>
-                        <th>To</th>
-                        <th>Message</th>
-                        <th>Timestamp</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for message in messages_sent %}
-                    <tr>
-                        <td>{{ message.receiver_email }}</td>
-                        <td class="message-content">{{ message.content }}</td>
-                        <td>{{ message.timestamp }}</td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="3" class="text-center">No messages sent.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+        <button type="submit" class="btn btn-primary mt-2">Send Message</button>
+    </form>
+</div>
+
+<!-- ================== OFFICER/ADMIN MESSAGES ================== -->
+<h3>Staff Messages</h3>
+
+<!-- Messages from Officers/Admins -->
+<h4>Received from Officers & Admins</h4>
+<div class="scrollable-table">
+    <table class="table fixed-width">
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>Message</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in officer_received_messages %}
+            <tr>
+                <td>{{ message.sender.username }} (Officer/Admin)</td>
+                <td class="message-content">{{ message.content }}</td>
+                <td>{{ message.timestamp }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">No messages from officers/admins.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Messages Sent to Officers/Admins -->
+<h4>Sent to Officers & Admins</h4>
+<div class="scrollable-table">
+    <table class="table fixed-width">
+        <thead>
+            <tr>
+                <th>To</th>
+                <th>Message</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in officer_sent_messages %}
+            <tr>
+                <td>{{ message.receiver_email }} (Officer/Admin)</td>
+                <td class="message-content">{{ message.content }}</td>
+                <td>{{ message.timestamp }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">No messages sent to officers/admins.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- ================== CANDIDATE MESSAGES ================== -->
+<h3>Candidate Messages</h3>
+
+<!-- Messages from Candidates -->
+<h4>Received from Candidates</h4>
+<div class="scrollable-table">
+    <table class="table fixed-width">
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>Message</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in candidate_received_messages %}
+            <tr>
+                <td>{{ message.sender.username }} (Candidate)</td>
+                <td class="message-content">{{ message.content }}</td>
+                <td>{{ message.timestamp }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">No messages from candidates.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Messages Sent to Candidates -->
+<h4>Sent to Candidates</h4>
+<div class="scrollable-table">
+    <table class="table fixed-width">
+        <thead>
+            <tr>
+                <th>To</th>
+                <th>Message</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in candidate_sent_messages %}
+            <tr>
+                <td>{{ message.receiver_email }} (Candidate)</td>
+                <td class="message-content">{{ message.content }}</td>
+                <td>{{ message.timestamp }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">No messages sent to candidates.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
