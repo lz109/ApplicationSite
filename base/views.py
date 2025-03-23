@@ -111,18 +111,6 @@ def officer_dashboard(request):
     candidates = Candidate.objects.filter(officer=request.user)
     events = Event.objects.all().order_by("-date")
 
-    if program_fit_filter:
-        normalized_filter = normalize_text(program_fit_filter)
-        candidates = candidates.filter(program_fit__iexact=normalized_filter)
-
-    if application_status_filter:
-        candidates = candidates.filter(applications__application_status=application_status_filter)
-    if college_filter:
-        candidates = candidates.filter(applications__college_name__icontains=college_filter).distinct()
-    if score_sort == "high_to_low":
-        candidates = candidates.order_by(F("gpa").desc())
-    elif score_sort == "low_to_high":
-        candidates = candidates.order_by(F("gpa").asc())
 
     # Handle file upload
     extracted_data = None
@@ -194,8 +182,19 @@ def officer_dashboard(request):
     form = DocumentUploadForm()
     events = Event.objects.all().order_by("-date")
     print(">>> Loaded events:", list(events))
-    candidates = Candidate.objects.filter(officer=request.user)
-    officers = User.objects.filter(role="officer")
+    
+    if program_fit_filter:
+        normalized_filter = normalize_text(program_fit_filter)
+        candidates = candidates.filter(program_fit__iexact=normalized_filter)
+
+    if application_status_filter:
+        candidates = candidates.filter(applications__application_status=application_status_filter)
+    if college_filter:
+        candidates = candidates.filter(applications__college_name__icontains=college_filter).distinct()
+    if score_sort == "high_to_low":
+        candidates = candidates.order_by(F("gpa").desc())
+    elif score_sort == "low_to_high":
+        candidates = candidates.order_by(F("gpa").asc())
 
     return render(request, "officer_dashboard.html", {
         "candidates": candidates,
