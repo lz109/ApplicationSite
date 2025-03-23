@@ -130,42 +130,6 @@
 <h3>Upcoming Event Calendar</h3>
 <div id="calendar"></div>
 
-<!-- Load FullCalendar.js -->
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            height: 400, // Adjust height to make it smaller
-            contentHeight: 350, // Reduce the content height
-            aspectRatio: 1.5,
-            events: [
-                {% for event in events %}
-                {
-                    title: "{{ event.title }}",
-                    start: "{{ event.date|date:'Y-m-d H:i:s' }}",
-                    description: "{{ event.description }}",
-                    created_by: "{{ event.created_by }}",
-                    members: "{% for member in event.members.all %}{{ member.name }}{% if not forloop.last %}, {% endif %}{% endfor %}"
-                },
-                {% endfor %}
-            ],
-            eventClick: function (info) {
-                alert(
-                    "Event: " + info.event.title + "\n" +
-                    "Description: " + info.event.extendedProps.description + "\n" +
-                    "Host: " + info.event.extendedProps.created_by + "\n" +
-                    "Members: " + info.event.extendedProps.members
-                );
-            }
-        });
-        calendar.render();
-    });
-</script>
-
 
 <!-- Create New Event Form -->
 <h3>Create an Event</h3>
@@ -340,5 +304,50 @@
     <footer>
         <p>&copy; 2025 Admissions Dashboard. All Rights Reserved.</p>
     </footer>
+<!-- FullCalendar styles and script -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+
+<script>
+    window.addEventListener("load", function () {
+        console.log("✅ FullCalendar script loaded");
+
+        var calendarEl = document.getElementById('calendar');
+        if (!calendarEl) {
+            console.error("❌ Calendar container not found");
+            return;
+        }
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            height: 400,
+            contentHeight: 350,
+            aspectRatio: 1.5,
+            events: [
+                {% for event in events %}
+                {
+                    title: "{{ event.title|escapejs }}",
+                    start: "{{ event.date|date:'Y-m-d H:i:s' }}",
+                    description: "{{ event.description|escapejs }}",
+                    created_by: "{{ event.created_by|escapejs }}",
+                    members: "{{ event.members.all|join:', '|escapejs }}"
+                },
+                {% endfor %}
+            ],
+            eventClick: function (info) {
+                alert(
+                    "Event: " + info.event.title + "\n" +
+                    "Description: " + info.event.extendedProps.description + "\n" +
+                    "Host: " + info.event.extendedProps.created_by + "\n" +
+                    "Members: " + info.event.extendedProps.members
+                );
+            }
+        });
+
+        calendar.render();
+    });
+</script>
+
+
 </body>
 </html>

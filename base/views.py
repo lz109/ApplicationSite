@@ -102,6 +102,7 @@ def normalize_text(text):
 @login_required
 @user_passes_test(is_officer)
 def officer_dashboard(request):
+    print(">>> officer_dashboard loaded with method:", request.method)
     program_fit_filter = request.GET.get("program_fit", "")
     application_status_filter = request.GET.get("application_status", "")
     college_filter = request.GET.get("college_name", "")
@@ -190,6 +191,12 @@ def officer_dashboard(request):
 
                 candidates = Candidate.objects.filter(officer=request.user)
                 officers = User.objects.filter(role="officer")
+    form = DocumentUploadForm()
+    events = Event.objects.all().order_by("-date")
+    print(">>> Loaded events:", list(events))
+    candidates = Candidate.objects.filter(officer=request.user)
+    officers = User.objects.filter(role="officer")
+
     return render(request, "officer_dashboard.html", {
         "candidates": candidates,
         "events": events,
@@ -330,6 +337,7 @@ def invite_candidate_to_event(request):
             messages.warning(request, "No candidates were selected.")
 
     return redirect("officer_dashboard")
+
 
 
 @login_required
