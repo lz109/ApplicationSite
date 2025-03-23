@@ -130,52 +130,66 @@ def officer_dashboard(request):
     if request.method == "POST":
         form = DocumentUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            uploaded_file = form.cleaned_data['file']
-            fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'uploads'))
-            filename = fs.save(uploaded_file.name, uploaded_file)
-            file_path = fs.path(filename)
+            uploaded_files = request.FILES.getlist('files')
+            for uploaded_file in uploaded_files:
+                fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'uploads'))
+                filename = fs.save(uploaded_file.name, uploaded_file)
+                file_path = fs.path(filename)
 
-            if uploaded_file.name.endswith(".pdf"):
-                extracted_text = extract_text_from_pdf(file_path)
-            elif uploaded_file.name.endswith(".docx"):
-                extracted_text = extract_text_from_docx(file_path)
-            else:
-                messages.error(request, "Unsupported file format. Only PDF and DOCX are allowed.")
-                return redirect("officer_dashboard")
-
-            extracted_data = process_extracted_text(extracted_text)
-
-            # Convert GPA to float safely
-            gpa_value = None
-            try:
-                gpa_value = float(extracted_data["gpa"])
-            except ValueError:
-                gpa_value = None
-
-            try:
-                # Ensure candidate is saved in DB
-                candidate, created = Candidate.objects.update_or_create(
-                    name = extracted_data["name"].replace("Name: ", ""),
-                     
-                    defaults={
-                        "email": extracted_data["email"], 
-                        "gpa": gpa_value,
-                        "program_fit": extracted_data["program"],
-                        "application_status": "pending"
-                    }
-                )
-
-                if created:
-                    messages.success(request, "Candidate details extracted and saved successfully!")
+                if uploaded_file.name.endswith(".pdf"):
+                    extracted_text = extract_text_from_pdf(file_path)
+                elif uploaded_file.name.endswith(".docx"):
+                    extracted_text = extract_text_from_docx(file_path)
                 else:
-                    messages.info(request, "Candidate already exists. Updated existing entry.")
+                    messages.error(request, f"Unsupported file format: {uploaded_file.name}")
+                    continue
 
-            except IntegrityError as e:
-                print("Database error:", e)
-                messages.error(request, "Error saving candidate data. Please check for duplicates.")
+                extracted_data = process_extracted_text(extracted_text)
 
-            candidates = Candidate.objects.filter(officer=request.user)
-            officers = User.objects.filter(role="officer")
+                # Convert GPA to float safely
+                gpa_value = None
+                try:
+                    gpa_value = float(extracted_data["gpa"])
+                except ValueError:
+                    gpa_value = None
+
+                try:
+                    # Ensure candidate is saved in DB
+                    candidate, created = Candidate.objects.update_or_create(
+                        name=extracted_data["name"].replace("Name: ", ""),
+                        defaults={
+                            "email": extracted_data["email"], 
+                            "gpa": gpa_value,
+                            "program_fit": extracted_data["program"],
+                            "application_status": "pending",
+                            "academic_experience": extracted_data["academic_experience"], 
+                            "skills": extracted_data["skills"],                            
+                            "projects": extracted_data["projects"],
+                            "officer": request.user
+                        }
+                    )
+
+                    # Save colleges applied (ensure no duplicates)
+                    college_names = extracted_data.get("colleges_applied", "").split(",")
+
+                    for college_name in map(str.strip, college_names):
+                        if college_name:
+                            CollegeApplication.objects.get_or_create(
+                                candidate=candidate,
+                                college_name=college_name,
+                                defaults={"application_status": "pending"}
+                            )
+                    if created:
+                        messages.success(request, "Candidate details extracted and saved successfully!")
+                    else:
+                        messages.info(request, "Candidate already exists. Updated existing entry.")
+
+                except IntegrityError as e:
+                    print("Database error:", e)
+                    messages.error(request, "Error saving candidate data. Please check for duplicates.")
+
+                candidates = Candidate.objects.filter(officer=request.user)
+                officers = User.objects.filter(role="officer")
     return render(request, "officer_dashboard.html", {
         "candidates": candidates,
         "events": events,
@@ -458,87 +472,87 @@ def extract_text_from_docx(file_path):
     return text
 
 
-
 @login_required
 @user_passes_test(is_officer)
 def upload_document(request):
-    extracted_text = None
-
     if request.method == "POST":
         form = DocumentUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            uploaded_file = form.cleaned_data['file']
-            fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'uploads'))
-            filename = fs.save(uploaded_file.name, uploaded_file)
-            file_path = fs.path(filename)
+            uploaded_files = form.cleaned_data["files"]
+            all_extracted_data = []
 
-            # Extract text based on file type
-            if uploaded_file.name.endswith(".pdf"):
-                extracted_text = extract_text_from_pdf(file_path)
-            elif uploaded_file.name.endswith(".docx"):
-                extracted_text = extract_text_from_docx(file_path)
-            else:
-                messages.error(request, "Unsupported file format. Only PDF and DOCX are allowed.")
-                return redirect("officer_dashboard")
+            for uploaded_file in uploaded_files:
+                fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'uploads'))
+                filename = fs.save(uploaded_file.name, uploaded_file)
+                file_path = fs.path(filename)
 
-            # Extract structured data
-            extracted_data = process_extracted_text(extracted_text)
+                # Extract text from file
+                if uploaded_file.name.endswith(".pdf"):
+                    extracted_text = extract_text_from_pdf(file_path)
+                elif uploaded_file.name.endswith(".docx"):
+                    extracted_text = extract_text_from_docx(file_path)
+                else:
+                    messages.warning(request, f"Unsupported file: {uploaded_file.name}")
+                    continue
 
-            gpa_value = None
-            try:
-                gpa_value = float(extracted_data["gpa"])
-            except ValueError:
-                gpa_value = None
+                extracted_data = process_extracted_text(extracted_text)
+                all_extracted_data.append(extracted_data)
 
-            # Save to Candidate model
-            candidate, created = Candidate.objects.get_or_create(
-                email=extracted_data["email"],
-                defaults={
-                    "name": extracted_data["name"],
-                    "gpa": gpa_value,
-                    "program_fit": extracted_data["program"],
-                    "academic_experience": extracted_data["academic_experience"],
-                    "skills": extracted_data["skills"],
-                    "projects": extracted_data["projects"],
-                    "officer": request.user  # Assign to logged-in officer
-                }
-            )
-            if not created and candidate.officer is None:
-                candidate.officer = request.user
-                candidate.save()
-            if created:
-                messages.success(request, "Candidate details extracted and saved successfully!")
-            else:
-                messages.info(request, "Candidate already exists. No duplicate entry created.")
+                try:
+                    gpa_value = float(extracted_data.get("gpa", 0.0))
+                except ValueError:
+                    gpa_value = None
 
-            # Process colleges applied
-            college_names = extracted_data.get("colleges_applied", "").split(",")  # Assuming a comma-separated list
-            
-            for college_name in map(str.strip, college_names):
-                if college_name:
-                    # Check if application already exists for this candidate and college
-                    existing_application = CollegeApplication.objects.filter(
-                        candidate=candidate, college_name=college_name
-                    ).exists()
+                candidate, created = Candidate.objects.get_or_create(
+                    email=extracted_data["email"],
+                    defaults={
+                        "name": extracted_data["name"],
+                        "gpa": gpa_value,
+                        "program_fit": extracted_data["program"],
+                        "academic_experience": extracted_data["academic_experience"],
+                        "skills": extracted_data["skills"],
+                        "projects": extracted_data["projects"],
+                        "officer": request.user
+                    }
+                )
+                if not created and candidate.officer is None:
+                    candidate.officer = request.user
+                    candidate.save()
 
-                    if not existing_application:
-                        CollegeApplication.objects.create(
-                            candidate=candidate, college_name=college_name, application_status="pending"
-                        )
-            candidates = Candidate.objects.filter(officer=request.user)  # Fetch all candidates
-            applications = CollegeApplication.objects.all()  # Fetch all applications
+                college_names = extracted_data.get("colleges_applied", "").split(",")
+                for college_name in map(str.strip, college_names):
+                    if college_name:
+                        exists = CollegeApplication.objects.filter(
+                            candidate=candidate,
+                            college_name=college_name
+                        ).exists()
+                        if not exists:
+                            CollegeApplication.objects.create(
+                                candidate=candidate,
+                                college_name=college_name,
+                                application_status="pending"
+                            )
 
+            candidates = Candidate.objects.filter(officer=request.user)
+            applications = CollegeApplication.objects.all()
+
+            messages.success(request, "All files processed successfully.")
             return render(request, "officer_dashboard.html", {
                 "form": form,
-                "extracted_text": extracted_text,
-                "processed_data": extracted_data,
-                "candidates": candidates,  # Pass updated candidate list
-                "applications": applications,  # Pass updated college applications
+                "processed_data_list": all_extracted_data,
+                "candidates": candidates,
+                "applications": applications
             })
     else:
         form = DocumentUploadForm()
 
-    return render(request, "officer_dashboard.html", {"form": form})
+    candidates = Candidate.objects.filter(officer=request.user)
+    applications = CollegeApplication.objects.all()
+    return render(request, "officer_dashboard.html", {
+        "form": form,
+        "candidates": candidates,
+        "applications": applications
+    })
 
 
 @login_required
@@ -652,37 +666,43 @@ def edit_candidate(request, candidate_id):
 from django.shortcuts import render
 from .models import Candidate, CollegeApplication
 
+@login_required
+@user_passes_test(lambda u: u.role == "officer")
 def statistics_view(request):
-    # Count candidates and applications
-    total_candidates = Candidate.objects.count()
-    total_college_applications = CollegeApplication.objects.count()
-    accepted_college_applications = CollegeApplication.objects.filter(application_status="accepted").count()
-    rejected_college_applications = CollegeApplication.objects.filter(application_status="rejected").count()
-    pending_college_applications = CollegeApplication.objects.filter(application_status="pending").count()
-    waitlisted_college_applications = CollegeApplication.objects.filter(application_status="waitlisted").count()
+    filter_option = request.GET.get("filter", "mine")  # Default to 'mine' for officers
 
-    # Compute acceptance ratio: accepted applications / total applications
+    if filter_option == "mine":
+        candidates = Candidate.objects.filter(officer=request.user)
+    else:
+        candidates = Candidate.objects.all()
+
+    total_candidates = candidates.count()
+    applications = CollegeApplication.objects.filter(candidate__in=candidates)
+
+    total_college_applications = applications.count()
+    accepted_college_applications = applications.filter(application_status="accepted").count()
+    rejected_college_applications = applications.filter(application_status="rejected").count()
+    pending_college_applications = applications.filter(application_status="pending").count()
+    waitlisted_college_applications = applications.filter(application_status="waitlisted").count()
+
     if total_college_applications > 0:
         acceptance_ratio = round((accepted_college_applications / total_college_applications) * 100, 2)
     else:
-        acceptance_ratio = 0  # Prevent division by zero
+        acceptance_ratio = 0
 
-    # Calculate acceptance ratio per candidate
+    # Per-candidate acceptance stats
     candidate_acceptance_ratios = []
-    for candidate in Candidate.objects.all():
-        candidate_applications = candidate.applications.count()  # Total applications per candidate
-        candidate_accepted = candidate.applications.filter(application_status="accepted").count()
-
-        if candidate_applications > 0:
-            candidate_ratio = round((candidate_accepted / candidate_applications) * 100, 2)
-        else:
-            candidate_ratio = 0  # No applications
+    for candidate in candidates:
+        candidate_apps = candidate.applications.all()
+        total = candidate_apps.count()
+        accepted = candidate_apps.filter(application_status="accepted").count()
+        ratio = round((accepted / total) * 100, 2) if total > 0 else 0
 
         candidate_acceptance_ratios.append({
             "name": candidate.name,
-            "total_applications": candidate_applications,
-            "accepted_applications": candidate_accepted,
-            "acceptance_ratio": candidate_ratio
+            "total_applications": total,
+            "accepted_applications": accepted,
+            "acceptance_ratio": ratio
         })
 
     context = {
@@ -693,7 +713,8 @@ def statistics_view(request):
         "pending_college_applications": pending_college_applications,
         "waitlisted_college_applications": waitlisted_college_applications,
         "acceptance_ratio": acceptance_ratio,
-        "candidate_acceptance_ratios": candidate_acceptance_ratios
+        "candidate_acceptance_ratios": candidate_acceptance_ratios,
+        "filter": filter_option
     }
-    
+
     return render(request, "statistics.html", context)

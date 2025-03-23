@@ -11,7 +11,15 @@
 <body>
     {% block content %}
     <h2>Application Statistics</h2>
-
+    <form method="get" action="">
+        <label for="filter">View Candidates:</label>
+        <select name="filter" id="filter">
+            <option value="all" {% if filter == "all" %}selected{% endif %}>All Candidates</option>
+            <option value="mine" {% if filter == "mine" %}selected{% endif %}>My Candidates</option>
+        </select>
+        <button type="submit">Apply</button>
+    </form>
+    
     <div>
         <p><strong>Total Candidates:</strong> {{ total_candidates }}</p>
         <p><strong>Total College Applications:</strong> {{ total_college_applications }}</p>

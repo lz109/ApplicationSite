@@ -22,12 +22,13 @@
 <h3>View Statistics</h3>
 <a href="{% url 'statistics' %}" class="btn btn-info">Candidate Statistics for 2025</a>
 <!-- Upload Candidate Document -->
-<h3>Upload Candidate Document</h3>
+<h3>Upload Candidate Documents</h3>
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Upload</button>
 </form>
+
 
 {% if extracted_data %}
     <h3>Extracted Information:</h3>

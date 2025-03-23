@@ -860,3 +860,30 @@ Traceback (most recent call last):
     raise self.error(token, msg)
 django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 12: 'block'. Looking for one of: endblock.
 INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+WARNING:django.request:Not Found: /favicon.ico
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/forms.py changed, reloading.
+ERROR:django.request:Internal Server Error: /officer_dashboard/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 133, in officer_dashboard
+    uploaded_file = form.cleaned_data['file']
+                    ~~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'file'
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.

@@ -30,5 +30,22 @@ class AddOfficerForm(UserCreationForm):
         model = User
         fields = ["username", "email", "password1", "password2"]
 
+# Custom widget that supports multiple file selection
+class MultipleFileInput(forms.ClearableFileInput):
+    allow_multiple_selected = True
+
+# Custom field to handle multiple files cleanly
+class MultipleFileField(forms.FileField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("widget", MultipleFileInput())
+        super().__init__(*args, **kwargs)
+
+    def clean(self, data, initial=None):
+        single_file_clean = super().clean
+        if isinstance(data, (list, tuple)):
+            return [single_file_clean(d, initial) for d in data]
+        return [single_file_clean(data, initial)]
+
+# The form for uploading multiple candidate documents
 class DocumentUploadForm(forms.Form):
-    file = forms.FileField()
+    files = MultipleFileField(label='Select candidate documents')
