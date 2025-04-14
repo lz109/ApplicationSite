@@ -3,7 +3,7 @@ from .views import home, signup, signin, signout, dashboard, admin_dashboard, of
 from .views import create_event, invite_candidate_to_event, edit_profile, add_officer, remove_officer, upload_document, add_candidate, candidate_profile, edit_candidate
 from .views import send_message_to_user, statistics_view
 urlpatterns = [ 
-    path("", home, name="home"), 
+    path("", home, name="landing"),
     path("signup/", signup, name="signup"),
     path("signin/", signin, name="signin"),
     path("signout/", signout, name="signout"),

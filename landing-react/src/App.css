@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #f9fafe;
+  color: #333;
+}
+
+.app {
+  text-align: center;
+}
+
+.hero {
+  background: linear-gradient(to right, #3b82f6, #1e40af);
+  color: white;
+  padding: 80px 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.buttons {
+  margin-top: 30px;
+}
+
+.btn {
+  padding: 12px 28px;
+  margin: 0 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.btn.primary {
+  background: white;
+  color: #1e3a8a;
+}
+
+.btn.primary:hover {
+  background: #e2e8f0;
+}
+
+.btn.secondary {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+.btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.features {
+  padding: 60px 20px;
+}
+
+.features h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.feature-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.feature-box {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  max-width: 280px;
+  flex: 1 1 250px;
+}
+
+.feature-box h3 {
+  margin-top: 0;
+  color: #1e40af;
+}
+
+.footer {
+  padding: 20px;
+  background: #f1f5f9;
+  color: #6b7280;
+  font-size: 0.9rem;
+}

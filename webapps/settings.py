@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'base.apps.BaseConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -112,7 +113,7 @@ DATABASES = {
 # }
 
 # Override with Heroku's database URL if available
-#DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

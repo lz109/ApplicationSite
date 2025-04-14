@@ -31,7 +31,7 @@ from django.db import IntegrityError
 from pyresparser import ResumeParser
 
 def home(request): 
-    return render(request, "home.html")
+    return render(request, "landing.html")
 
 def signup(request):
     # if request.user.is_authenticated:
