@@ -49,6 +49,7 @@ requests==2.32.3
 rpds-py==0.20.1
 six==1.17.0
 sortedcontainers==2.4.0
+setuptools==58.2.0
 spacy==2.3.5
 sqlparse==0.5.3
 srsly==1.0.7
