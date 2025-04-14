@@ -10,3 +10,14 @@ whitenoise
 pymupdf
 dj-database-url
 gunicorn
+djangorestframework
+pyresparser==1.0.6
+nltk>=3.5
+spacy>=2.3.0,<3.0.0
+pdfminer.six>=20201018
+pyresparser
+pytesseract
+pdf2image
+python-docx
+numpy
+scikit-learn
