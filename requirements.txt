@@ -24,7 +24,7 @@ murmurhash==1.0.12
 nltk==3.8.1
 numpy==1.24.4
 packaging==24.2
-pandas==2.0.3
+pandas==2.1.4
 pdf2image==1.17.0
 pdfminer.six==20250324
 pillow==10.4.0
