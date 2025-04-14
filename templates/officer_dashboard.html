@@ -53,21 +53,14 @@
     <input type="email" name="email" required>
 
     <label for="program_fit">Program Fit:</label>
-    <select name="program_fit" required>
-        <option value="civil_engineering">Civil Engineering</option>
-        <option value="mechanical_engineering">Mechanical Engineering</option>
-        <option value="electrical_engineering">Electrical Engineering</option>
-        <option value="computer_engineering">Computer Engineering</option>
-        <option value="chemical_engineering">Chemical Engineering</option>
-        <option value="biomedical_engineering">Biomedical Engineering</option>
-        <option value="aerospace_engineering">Aerospace Engineering</option>
-        <option value="industrial_engineering">Industrial Engineering</option>
-        <option value="software_engineering">Software Engineering</option>
-        <option value="math">Math</option>
-        <option value="science">Science</option>
-        <option value="business">Business</option>
-        <option value="arts">Arts</option>
-    </select>
+    <select name="program_fit" id="program_fit" onchange="this.form.submit()">
+    <option value="">-- All Programs --</option>
+    {% for value, label in program_choices %}
+      <option value="{{ value }}" {% if request.GET.program_fit == value %}selected{% endif %}>
+        {{ label }}
+      </option>
+    {% endfor %}
+  </select>
 
     <label for="gpa">GPA:</label>
     <input type="number" name="gpa" step="0.01" min="0" max="4" required>
@@ -170,23 +163,13 @@
         <!-- Program Fit Filter -->
     <div class="col-md-4">
         <label for="program_fit">Program Fit:</label>
-        <select name="program_fit" class="form-select">
-            <option value="">All</option>
-            <optgroup label="Engineering">
-                <option value="civil_engineering" {% if program_fit_filter|lower == "civilengineering"|lower %}selected{% endif %}>Civil Engineering</option>
-                <option value="mechanical_engineering" {% if program_fit_filter|lower == "mechanicalengineering"|lower %}selected{% endif %}>Mechanical Engineering</option>
-                <option value="electrical_engineering" {% if program_fit_filter|lower == "electricalengineering"|lower %}selected{% endif %}>Electrical Engineering</option>
-                <option value="computer_engineering" {% if program_fit_filter|lower == "computerengineering"|lower %}selected{% endif %}>Computer Engineering</option>
-                <option value="chemical_engineering" {% if program_fit_filter|lower == "chemicalengineering"|lower %}selected{% endif %}>Chemical Engineering</option>
-                <option value="biomedical_engineering" {% if program_fit_filter|lower == "biomedicalengineering"|lower %}selected{% endif %}>Biomedical Engineering</option>
-                <option value="aerospace_engineering" {% if program_fit_filter|lower == "aerospaceengineering"|lower %}selected{% endif %}>Aerospace Engineering</option>
-                <option value="industrial_engineering" {% if program_fit_filter|lower == "industrialengineering"|lower %}selected{% endif %}>Industrial Engineering</option>
-                <option value="software_engineering" {% if program_fit_filter|lower == "softwareengineering"|lower %}selected{% endif %}>Software Engineering</option>
-            </optgroup>
-            <option value="math" {% if program_fit_filter|lower == "math"|lower %}selected{% endif %}>Math</option>
-            <option value="science" {% if program_fit_filter|lower == "science"|lower %}selected{% endif %}>Science</option>
-            <option value="business" {% if program_fit_filter|lower == "business"|lower %}selected{% endif %}>Business</option>
-            <option value="arts" {% if program_fit_filter|lower == "arts"|lower %}selected{% endif %}>Arts</option>
+        <select name="program_fit" class="form-select" onchange="this.form.submit()">
+        <option value="">-- All Programs --</option>
+        {% for value, label in program_choices %}
+            <option value="{{ value }}" {% if program_fit_filter == value %}selected{% endif %}>
+            {{ label }}
+            </option>
+        {% endfor %}
         </select>
     </div>
 
@@ -227,7 +210,17 @@
             <th>Program Fit</th>
             <th>GPA</th>
             <th>Colleges Applied & Status</th>
-            <th>Actions</th>
+            <th>
+                <data-bs-toggle="tooltip" data-bs-placement="top"
+                        title="Candidate score is based on:
+              - GPA (max 30)
+              - Skills (max 20)
+              - Projects (max 20)
+              - Academic Experience (max 30)">
+                  Rating(/100)
+              </th>
+              
+            <th>Message</th>
         </tr>
     </thead>
     <tbody>
@@ -283,6 +276,12 @@
             </tbody>
         </table>
     </td>
+    <td>
+        <span class="badge bg-info text-dark">
+            {{ candidate.score }}
+        </span>
+    </td>
+    
     <td>
         <form method="post" action="{% url 'send_message' %}">
             {% csrf_token %}
@@ -347,7 +346,13 @@
         calendar.render();
     });
 </script>
-
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+  </script>
+  
 
 </body>
 </html>

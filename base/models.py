@@ -30,22 +30,75 @@ class User(AbstractUser):
 
 # Candidate Model
 class Candidate(models.Model):
-    PROGRAM_CHOICES = (
-    ('civil_engineering', 'Civil Engineering'),
-    ('mechanical_engineering', 'Mechanical Engineering'),
-    ('electrical_engineering', 'Electrical Engineering'),
-    ('computer_engineering', 'Computer Engineering'),
-    ('chemical_engineering', 'Chemical Engineering'),
-    ('biomedical_engineering', 'Biomedical Engineering'),
-    ('aerospace_engineering', 'Aerospace Engineering'),
-    ('industrial_engineering', 'Industrial Engineering'),
-    ('software_engineering', 'Software Engineering'),
-    ('math', 'Math'),
-    ('science', 'Science'),
-    ('business', 'Business'),
-    ('arts', 'Arts'),
-)
+    def calculate_score(self):
+        score = 0
 
+        # GPA (max 30)
+        if self.gpa:
+            score += min(self.gpa / 4.0 * 30, 30)
+
+        # Skills (max 20)
+        if self.skills:
+            skills_list = [s.strip() for s in self.skills.split(",") if s.strip()]
+            score += min(len(skills_list) * 2, 20)
+
+        # Projects (max 20)
+        if self.projects:
+            project_count = self.projects.count("\n") + 1 if "\n" in self.projects else 1
+            score += min(project_count * 5, 20)
+
+        # Academic Experience (max 30)
+        if self.academic_experience:
+            word_count = len(self.academic_experience.split())
+            score += min(word_count / 10, 30)
+
+        return round(score, 1)
+    PROGRAM_CHOICES = (
+    ('accounting', 'Accounting'),
+    ('aerospace_engineering', 'Aerospace Engineering'),
+    ('agriculture', 'Agriculture'),
+    ('architecture', 'Architecture'),
+    ('art', 'Art'),
+    ('biomedical_engineering', 'Biomedical Engineering'),
+    ('biology', 'Biology'),
+    ('business', 'Business'),
+    ('chemical_engineering', 'Chemical Engineering'),
+    ('chemistry', 'Chemistry'),
+    ('civil_engineering', 'Civil Engineering'),
+    ('communications', 'Communications'),
+    ('computer_engineering', 'Computer Engineering'),
+    ('computer_science', 'Computer Science'),
+    ('criminology', 'Criminology'),
+    ('data_science', 'Data Science'),
+    ('design', 'Design'),
+    ('economics', 'Economics'),
+    ('electrical_engineering', 'Electrical Engineering'),
+    ('english', 'English'),
+    ('environmental_science', 'Environmental Science'),
+    ('finance', 'Finance'),
+    ('graphic_design', 'Graphic Design'),
+    ('history', 'History'),
+    ('industrial_engineering', 'Industrial Engineering'),
+    ('information_technology', 'Information Technology'),
+    ('international_relations', 'International Relations'),
+    ('journalism', 'Journalism'),
+    ('law', 'Law'),
+    ('math', 'Math'),
+    ('mechanical_engineering', 'Mechanical Engineering'),
+    ('medicine', 'Medicine'),
+    ('music', 'Music'),
+    ('nursing', 'Nursing'),
+    ('philosophy', 'Philosophy'),
+    ('physics', 'Physics'),
+    ('political_science', 'Political Science'),
+    ('psychology', 'Psychology'),
+    ('public_health', 'Public Health'),
+    ('science', 'Science'),
+    ('software_engineering', 'Software Engineering'),
+    ('sociology', 'Sociology'),
+    ('statistics', 'Statistics'),
+    ('theater', 'Theater'),
+)
     
     STATUS_CHOICES = (
         ('pending', 'Pending'),
@@ -56,7 +109,7 @@ class Candidate(models.Model):
     
     name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
-    program_fit = models.CharField(max_length=50, choices=PROGRAM_CHOICES, default='engineering')
+    program_fit = models.CharField(choices=PROGRAM_CHOICES, default='engineering')
     gpa = models.FloatField(default=0.0)
     application_status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="pending")
     shortlisted = models.BooleanField(default=False)

@@ -28,6 +28,7 @@ import re
 from django.db.models.functions import Lower
 from django.db import IntegrityError
 
+from pyresparser import ResumeParser
 
 def home(request): 
     return render(request, "home.html")
@@ -99,6 +100,30 @@ def normalize_text(text):
     """Normalize text by removing spaces, underscores, and converting to lowercase."""
     return re.sub(r'[\s_]+', '', text).lower()
 
+def calculate_score(self):
+    score = 0
+
+    # GPA weight (max 30)
+    if self.gpa:
+        score += min(self.gpa / 4.0 * 30, 30)
+
+    # Skills weight (max 20)
+    if self.skills:
+        skills_list = [s.strip() for s in self.skills.split(",") if s.strip()]
+        score += min(len(skills_list) * 2, 20)
+
+    # Projects weight (max 20)
+    if self.projects:
+        project_count = self.projects.count("\n") + 1 if "\n" in self.projects else 1
+        score += min(project_count * 5, 20)
+
+    # Academic experience weight (max 30)
+    if self.academic_experience:
+        score += min(len(self.academic_experience.split()) / 10, 30)
+
+    return round(score, 1)
+
+
 @login_required
 @user_passes_test(is_officer)
 def officer_dashboard(request):
@@ -110,12 +135,9 @@ def officer_dashboard(request):
     officers = User.objects.filter(role="officer")
     candidates = Candidate.objects.filter(officer=request.user)
     events = Event.objects.all().order_by("-date")
+    form = DocumentUploadForm()  # <-- Move here to ensure it's always defined
 
-
-    # Handle file upload
     extracted_data = None
-    form = DocumentUploadForm()
-
     if request.method == "POST":
         form = DocumentUploadForm(request.POST, request.FILES)
         if form.is_valid():
@@ -125,16 +147,26 @@ def officer_dashboard(request):
                 filename = fs.save(uploaded_file.name, uploaded_file)
                 file_path = fs.path(filename)
 
-                if uploaded_file.name.endswith(".pdf"):
-                    extracted_text = extract_text_from_pdf(file_path)
-                elif uploaded_file.name.endswith(".docx"):
-                    extracted_text = extract_text_from_docx(file_path)
-                else:
-                    messages.error(request, f"Unsupported file format: {uploaded_file.name}")
+                # Use pyresparser to extract structured resume data
+                try:
+                    print(f">>> Attempting to parse: {file_path}")
+                    parsed_data = ResumeParser(file_path).get_extracted_data()
+                except Exception as e:
+                    messages.error(request, f"Resume parsing failed for {uploaded_file.name}: {e}")
+                    print(">>> ResumeParser error:", e)
                     continue
 
-                extracted_data = process_extracted_text(extracted_text)
-
+                # Map parsed fields to your existing format (you may need to customize this)
+                extracted_data = {
+                    "name": parsed_data.get("name", ""),
+                    "email": parsed_data.get("email", ""),
+                    "gpa": parsed_data.get("cgpa", 0),
+                    "program": parsed_data.get("degree", [""])[0] if parsed_data.get("degree") else "",
+                    "academic_experience": "; ".join(parsed_data.get("experience", [])) if parsed_data.get("experience") else "",
+                    "skills": ", ".join(parsed_data.get("skills", [])) if parsed_data.get("skills") else "",
+                    "projects": "",  # pyresparser doesn't extract this directly; may need NLP/custom logic
+                    "colleges_applied": ""  # same as above
+                }
                 # Convert GPA to float safely
                 gpa_value = None
                 try:
@@ -179,13 +211,21 @@ def officer_dashboard(request):
 
                 candidates = Candidate.objects.filter(officer=request.user)
                 officers = User.objects.filter(role="officer")
-    form = DocumentUploadForm()
+    
     events = Event.objects.all().order_by("-date")
     print(">>> Loaded events:", list(events))
     
+    # if program_fit_filter:
+    #     normalized_filter = normalize_text(program_fit_filter)
+    #     candidates = candidates.filter(program_fit__icontains=normalized_filter)
+
+    program_fit_filter = request.GET.get("program_fit", "")
+    candidates = Candidate.objects.filter(officer=request.user)
+
     if program_fit_filter:
-        normalized_filter = normalize_text(program_fit_filter)
-        candidates = candidates.filter(program_fit__iexact=normalized_filter)
+        # Convert snake_case → space-separated for partial match
+        keyword = program_fit_filter.replace("_", " ").lower()
+        candidates = candidates.filter(program_fit__icontains=keyword)
 
     if application_status_filter:
         candidates = candidates.filter(applications__application_status=application_status_filter)
@@ -195,13 +235,16 @@ def officer_dashboard(request):
         candidates = candidates.order_by(F("gpa").desc())
     elif score_sort == "low_to_high":
         candidates = candidates.order_by(F("gpa").asc())
-
+    
+    for c in candidates:
+        c.score = c.calculate_score()
     return render(request, "officer_dashboard.html", {
         "candidates": candidates,
         "events": events,
         "form": form,
         "extracted_data": extracted_data,
-        "officers": officers
+        "officers": officers,
+        "program_choices": Candidate.PROGRAM_CHOICES
     })
 
 
