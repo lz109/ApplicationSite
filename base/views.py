@@ -28,7 +28,6 @@ import re
 from django.db.models.functions import Lower
 from django.db import IntegrityError
 
-from pydparser import ResumeParser
 
 def home(request): 
     return render(request, "landing.html")
@@ -163,6 +162,7 @@ def officer_dashboard(request):
             try:
                 ensure_spacy_model()
                 ensure_nltk_corpora()
+                from pydparser import ResumeParser
             except Exception as e:
                 messages.error(request, f"Model download error: {e}")
                 return render(request, "upload.html", {"form": form})
