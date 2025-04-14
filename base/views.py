@@ -126,7 +126,7 @@ def calculate_score(self):
 import spacy
 from spacy.util import is_package
 import spacy.cli
-def ensure_spacy_model(model_name="en_core_web_md"):
+def ensure_spacy_model(model_name="en_core_web_sm"):
     if not is_package(model_name):
         try:
             spacy.cli.download(model_name)
