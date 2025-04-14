@@ -35,8 +35,8 @@ preshed==3.0.9
 psycopg2-binary==2.9.10
 pycparser==2.22
 pycryptodome==3.22.0
+pydparser
 PyMuPDF==1.24.11
-pyresparser==1.0.6
 pyrsistent==0.20.0
 pytesseract==0.3.13
 python-dateutil==2.9.0.post0
