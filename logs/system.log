@@ -1262,3 +1262,4 @@ WARNING:django.request:Not Found: /manifest.json
 WARNING:django.request:Not Found: /manifest.json
 WARNING:django.request:Not Found: /manifest.json
 WARNING:django.request:Not Found: /manifest.json
+WARNING:django.request:Not Found: /manifest.json
