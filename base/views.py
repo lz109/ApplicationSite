@@ -28,7 +28,7 @@ import re
 from django.db.models.functions import Lower
 from django.db import IntegrityError
 
-from pyresparser import ResumeParser
+from pydparser import ResumeParser
 
 def home(request): 
     return render(request, "landing.html")
