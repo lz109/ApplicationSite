@@ -28,8 +28,6 @@ import re
 from django.db.models.functions import Lower
 from django.db import IntegrityError
 
-from pyresparser import ResumeParser
-
 from .forms import RegisterForm, SignInForm
 
 def home(request):
