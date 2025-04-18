@@ -7,3 +7,5 @@ db.sqlite3
 .env
 uploads/
 candidates_file/
+staticfiles/
+landing-react/

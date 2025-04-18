@@ -1173,3 +1173,10 @@ INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reload
 WARNING:django.security.csrf:Forbidden (CSRF token from POST incorrect.): /signup/
 WARNING:django.security.csrf:Forbidden (CSRF token from POST incorrect.): /signin/
 INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+WARNING:django.request:Not Found: /accounts/login/
+WARNING:django.request:Not Found: /accounts/login/
+WARNING:django.request:Not Found: /accounts/login/
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/forms.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/forms.py changed, reloading.

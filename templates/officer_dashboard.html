@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,300 +7,360 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Officer Dashboard</title>
     <link rel="stylesheet" href="{% static 'styles/style.css' %}">
-</head>
+    <style>
+        html, body {
+          height: 100%;
+          margin: 0;
+        }
+    
+        .sidebar {
+          margin: 0;
+          padding: 0;
+          width: 200px;
+          background-color: #f1f1f1;
+          position: fixed;
+          height: 100%;
+          overflow: auto;
+        }
+    
+        .sidebar a {
+          display: block;
+          color: black;
+          padding: 16px;
+          text-decoration: none;
+        }
+    
+        .sidebar a.active {
+          background-color: #04aa6d;
+          color: white;
+        }
+    
+        .sidebar a:hover:not(.active) {
+          background-color: #555;
+          color: white;
+        }
+    
+        main {
+          margin-left: 200px; /* Match sidebar width */
+          padding: 1rem;
+        }
+      </style>
+    </head>
+    
 <body>
+    
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <a href="{% url 'view_profile' %}">👤 My Profile</a>
+    <a href="{% url 'messages_page' %}">💬 Messages</a>
+    <a href="#view-statistics">📊 View Statistics</a>
+    <a href="#add-candidate">➕ Add Candidate</a>
+    <a href="#event_calendar">🗓 Event Calendar</a>
+    <a href="#create-event">✍️ Create Event</a>
+    <a href="#all-candidates">👥 All Candidates</a>
+    <a href="{% url 'signout' %}">Logout</a>
+  </div>
+
+
+     
+<main style="margin-left: 200px;">
     <header>
         <h1>Welcome, {{ user.username }}</h1>
-        <nav>
-            <ul>
-                <li><a href="{% url 'view_profile' %}">My Profile</a></li>
-                <li><a href="{% url 'messages_page' %}">Messages</a></li>
-
-                <li><a href="{% url 'signout' %}">Logout</a></li>
-            </ul>
-        </nav>
+        <p class="lead">As an <strong>Advisor</strong>, you can manage candidates, review applications, and schedule events.</p>
     </header>
-<h3>View Statistics</h3>
-<a href="{% url 'statistics' %}" class="btn btn-info">Candidate Statistics for 2025</a>
-<!-- Upload Candidate Document -->
-<h3>Upload Candidate Documents</h3>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
-</form>
+{% block content %}  
+    <h3 id="view-statistics">View Statistics</h3>
+    <a href="{% url 'statistics' %}" class="btn btn-info">Candidate Statistics for 2025</a>
 
 
-{% if extracted_data %}
-    <h3>Extracted Information:</h3>
-    <p><strong>Name:</strong> {{ extracted_data.name }}</p>
-    <p><strong>Email:</strong> {{ extracted_data.email }}</p>
-    <p><strong>GPA:</strong> {{ extracted_data.gpa }}</p>
-    <p><strong>Program:</strong> {{ extracted_data.program }}</p>
-    <p><strong>Academic Experience:</strong> {{ extracted_data.academic_experience }}</p>
-    <p><strong>Skills:</strong> {{ extracted_data.skills }}</p>
-    <p><strong>Projects:</strong> {{ extracted_data.projects }}</p>
-    <p><strong>Colleges applied:</strong> {{ extracted_data.colleges_applied }}</p>
-{% endif %}
+    <h3 id="add-candidate">Add New Candidate</h3>
+    <!-- Upload Candidate Document -->
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
 
-<h3>Add New Candidate</h3>
-<form method="POST" action="{% url 'add_candidate' %}">
-    {% csrf_token %}
+    {% if extracted_data %}
+        <h3>Extracted Information:</h3>
+        <p><strong>Name:</strong> {{ extracted_data.name }}</p>
+        <p><strong>Email:</strong> {{ extracted_data.email }}</p>
+        <p><strong>GPA:</strong> {{ extracted_data.gpa }}</p>
+        <p><strong>Program:</strong> {{ extracted_data.program }}</p>
+        <p><strong>Academic Experience:</strong> {{ extracted_data.academic_experience }}</p>
+        <p><strong>Skills:</strong> {{ extracted_data.skills }}</p>
+        <p><strong>Projects:</strong> {{ extracted_data.projects }}</p>
+        <p><strong>Colleges applied:</strong> {{ extracted_data.colleges_applied }}</p>
+    {% endif %}
+    <h2>OR</h2>
+    <form method="POST" action="{% url 'add_candidate' %}">
+        {% csrf_token %}
+        <table class="table table-borderless w-75 mx-auto">
+          <tr>
+            <td><label for="name" class="form-label">Full Name:</label></td>
+            <td><input type="text" name="name" class="form-control" required></td>
+          </tr>
+          <tr>
+            <td><label for="email" class="form-label">Email:</label></td>
+            <td><input type="email" name="email" class="form-control" required></td>
+          </tr>
+          <tr>
+            <td><label for="program_fit" class="form-label">Program Fit:</label></td>
+            <td>
+              <select name="program_fit" id="program_fit" class="form-select">
+                <option value="">-- All Programs --</option>
+                {% for value, label in program_choices %}
+                  <option value="{{ value }}" {% if request.GET.program_fit == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="gpa" class="form-label">GPA:</label></td>
+            <td><input type="number" name="gpa" step="0.01" min="0" max="4" class="form-control" required></td>
+          </tr>
+          <tr>
+            <td><label class="form-check-label">Shortlisted:</label></td>
+            <td><input type="checkbox" name="shortlisted" class="form-check-input"></td>
+          </tr>
+          <tr>
+            <td><label for="officer" class="form-label">Assigned Staff:</label></td>
+            <td>
+              <select name="officer" class="form-select" required>
+                <option value="">-- Select a Staff --</option>
+                {% for officer in officers %}
+                  <option value="{{ officer.id }}">{{ officer.username }} ({{ officer.email }})</option>
+                {% empty %}
+                  <option value="" disabled>No officers available</option>
+                {% endfor %}
+              </select>
+            </td>
+          </tr>
+        </table>
 
-    <label for="name">Full Name:</label>
-    <input type="text" name="name" required>
+        <h4>Colleges Applied</h4>
+        <div id="college-container">
+            <div class="college-entry">
+                <input type="text" name="college_name[]" placeholder="College Name" required>
+                <select name="application_status[]" required>
+                    <option value="pending">Pending</option>
+                    <option value="accepted">Accepted</option>
+                    <option value="rejected">Rejected</option>
+                    <option value="waitlisted">Waitlisted</option>
+                </select>
+            </div>
+        </div> <button type="button" onclick="addCollege()">Add Another College</button>
+        <br><br>
+        <button type="submit">Add Candidate</button>
+    </form>
 
-    <label for="email">Email:</label>
-    <input type="email" name="email" required>
+    <script>
+        function addCollege() {
+            var container = document.getElementById("college-container");
+            var newEntry = document.createElement("div");
+            newEntry.classList.add("college-entry");
+            newEntry.innerHTML = `
+                <input type="text" name="college_name[]" placeholder="College Name" required>
+                <select name="application_status[]" required>
+                    <option value="pending">Pending</option>
+                    <option value="accepted">Accepted</option>
+                    <option value="rejected">Rejected</option>
+                    <option value="waitlisted">Waitlisted</option>
+                </select>
+                <button type="button" onclick="removeCollege(this)">Remove</button>
+            `;
+            container.appendChild(newEntry);
+        }
 
-    <label for="program_fit">Program Fit:</label>
-    <select name="program_fit" id="program_fit" onchange="this.form.submit()">
-    <option value="">-- All Programs --</option>
-    {% for value, label in program_choices %}
-      <option value="{{ value }}" {% if request.GET.program_fit == value %}selected{% endif %}>
-        {{ label }}
-      </option>
-    {% endfor %}
-  </select>
+        function removeCollege(button) {
+            button.parentElement.remove();
+        }
+    </script>
 
-    <label for="gpa">GPA:</label>
-    <input type="number" name="gpa" step="0.01" min="0" max="4" required>
 
-    <label for="shortlisted">
-        <input type="checkbox" name="shortlisted"> Shortlisted
-    </label>
+    <!-- Events Section -->
+    <h3 id="event_calendar">Upcoming Event Calendar</h3>
+    <div id="calendar"></div>
 
-    <h4>Colleges Applied</h4>
-    <div id="college-container">
-        <div class="college-entry">
-            <input type="text" name="college_name[]" placeholder="College Name" required>
-            <select name="application_status[]" required>
-                <option value="pending">Pending</option>
-                <option value="accepted">Accepted</option>
-                <option value="rejected">Rejected</option>
-                <option value="waitlisted">Waitlisted</option>
-            </select>
-        </div>
-    </div>
-    
-    <button type="button" onclick="addCollege()">Add Another College</button>
-    <h4>Select Assigned Staff</h4>
-        <select name="officer" required>
-            <option value="">-- Select a Staff --</option>
-            {% for officer in officers %}
-                <option value="{{ officer.id }}">{{ officer.username }} ({{ officer.email }})</option>
-            {% empty %}
-                <option value="" disabled>No officers available</option>
+
+    <!-- Create New Event Form -->
+    <h3 id="create-event">Create an Event</h3>
+    <form method="post" action="{% url 'create_event' %}" class="mb-3">
+        {% csrf_token %}
+        <input type="text" name="title" class="form-control mb-2" placeholder="Event Title" required>
+        <textarea name="description" class="form-control mb-2" placeholder="Event Description" required></textarea>
+        <input type="datetime-local" name="date" class="form-control mb-2" required>
+        <button type="submit" class="btn btn-primary">Create Event</button>
+    </form>
+    <h3>Invite Candidates to an Event</h3>
+    <form method="post" action="{% url 'invite_candidate_to_event' %}" class="mb-3">
+        {% csrf_token %}
+        
+        <label for="event">Select Event:</label>
+        <select name="event_id" class="form-select mb-2" required>
+            <option value="" disabled selected>Choose an event</option>
+            {% for event in events %}
+            <option value="{{ event.id }}">{{ event.title }} - {{ event.date }}</option>
             {% endfor %}
         </select>
-    <button type="submit">Add Candidate</button>
-</form>
 
-<script>
-    function addCollege() {
-        var container = document.getElementById("college-container");
-        var newEntry = document.createElement("div");
-        newEntry.classList.add("college-entry");
-        newEntry.innerHTML = `
-            <input type="text" name="college_name[]" placeholder="College Name" required>
-            <select name="application_status[]" required>
-                <option value="pending">Pending</option>
-                <option value="accepted">Accepted</option>
-                <option value="rejected">Rejected</option>
-                <option value="waitlisted">Waitlisted</option>
-            </select>
-            <button type="button" onclick="removeCollege(this)">Remove</button>
-        `;
-        container.appendChild(newEntry);
-    }
-
-    function removeCollege(button) {
-        button.parentElement.remove();
-    }
-</script>
-
-
-<!-- Events Section -->
-<h3>Upcoming Event Calendar</h3>
-<div id="calendar"></div>
-
-
-<!-- Create New Event Form -->
-<h3>Create an Event</h3>
-<form method="post" action="{% url 'create_event' %}" class="mb-3">
-    {% csrf_token %}
-    <input type="text" name="title" class="form-control mb-2" placeholder="Event Title" required>
-    <textarea name="description" class="form-control mb-2" placeholder="Event Description" required></textarea>
-    <input type="datetime-local" name="date" class="form-control mb-2" required>
-    <button type="submit" class="btn btn-primary">Create Event</button>
-</form>
-<h3>Invite Candidates to an Event</h3>
-<form method="post" action="{% url 'invite_candidate_to_event' %}" class="mb-3">
-    {% csrf_token %}
-    
-    <label for="event">Select Event:</label>
-    <select name="event_id" class="form-select mb-2" required>
-        <option value="" disabled selected>Choose an event</option>
-        {% for event in events %}
-        <option value="{{ event.id }}">{{ event.title }} - {{ event.date }}</option>
-        {% endfor %}
-    </select>
-
-    <label for="candidates">Select Candidates:</label>
-    <select name="candidate_ids[]" class="form-select mb-2" multiple required>
-        {% for candidate in candidates %}
-        <option value="{{ candidate.id }}">{{ candidate.name }} - {{ candidate.email }}</option>
-        {% endfor %}
-    </select>
-    <button type="submit" class="btn btn-primary mt-2">Invite</button>
-    <small>Hold Ctrl to select multiple candidates.</small>
-</form>
-
-
-<h3>All Candidates</h3>
-<!-- Filter -->
-<form method="get" class="mb-3">
-    <div class="row">
-        <!-- Program Fit Filter -->
-    <div class="col-md-4">
-        <label for="program_fit">Program Fit:</label>
-        <select name="program_fit" class="form-select" onchange="this.form.submit()">
-        <option value="">-- All Programs --</option>
-        {% for value, label in program_choices %}
-            <option value="{{ value }}" {% if program_fit_filter == value %}selected{% endif %}>
-            {{ label }}
-            </option>
-        {% endfor %}
+        <label for="candidates">Select Candidates:</label>
+        <select name="candidate_ids[]" class="form-select mb-2" multiple required>
+            {% for candidate in candidates %}
+            <option value="{{ candidate.id }}">{{ candidate.name }} - {{ candidate.email }}</option>
+            {% endfor %}
         </select>
-    </div>
+        <button type="submit" class="btn btn-primary mt-2">Invite</button>
+        <small>Hold Ctrl to select multiple candidates.</small>
+    </form>
 
-        <label for="college_name">College Applied:</label>
-        <input type="text" name="college_name" placeholder="Enter college name" value="{{ college_filter }}">
 
-        <!-- Application Status Filter -->
+    <h3 id="all-candidates">All Candidates</h3>
+    <!-- Filter -->
+    <form method="get" class="mb-3">
+        <div class="row">
+            <!-- Program Fit Filter -->
         <div class="col-md-4">
-            <label for="application_status">Application Status:</label>
-            <select name="application_status" class="form-select">
-                <option value="">All</option>
-                <option value="pending" {% if request.GET.application_status == "pending" %}selected{% endif %}>Pending</option>
-                <option value="accepted" {% if request.GET.application_status == "accepted" %}selected{% endif %}>Accepted</option>
-                <option value="rejected" {% if request.GET.application_status == "rejected" %}selected{% endif %}>Rejected</option>
-                <option value="waitlisted" {% if request.GET.application_status == "waitlisted" %}selected{% endif %}>Waitlisted</option>
+            <label for="program_fit">Program Fit:</label>
+            <select name="program_fit" class="form-select" onchange="this.form.submit()">
+            <option value="">-- All Programs --</option>
+            {% for value, label in program_choices %}
+                <option value="{{ value }}" {% if program_fit_filter == value %}selected{% endif %}>
+                {{ label }}
+                </option>
+            {% endfor %}
             </select>
         </div>
 
-        <!-- Score Sorting -->
-        <div class="col-md-4">
-            <label for="score_sort">Sort by GPA:</label>
-            <select name="score_sort" class="form-select">
-                <option value="">None</option>
-                <option value="high_to_low" {% if request.GET.score_sort == "high_to_low" %}selected{% endif %}>High to Low</option>
-                <option value="low_to_high" {% if request.GET.score_sort == "low_to_high" %}selected{% endif %}>Low to High</option>
-            </select>
+            <label for="college_name">College Applied:</label>
+            <input type="text" name="college_name" placeholder="Enter college name" value="{{ college_filter }}">
+
+            <!-- Application Status Filter -->
+            <div class="col-md-4">
+                <label for="application_status">Application Status:</label>
+                <select name="application_status" class="form-select">
+                    <option value="">All</option>
+                    <option value="pending" {% if request.GET.application_status == "pending" %}selected{% endif %}>Pending</option>
+                    <option value="accepted" {% if request.GET.application_status == "accepted" %}selected{% endif %}>Accepted</option>
+                    <option value="rejected" {% if request.GET.application_status == "rejected" %}selected{% endif %}>Rejected</option>
+                    <option value="waitlisted" {% if request.GET.application_status == "waitlisted" %}selected{% endif %}>Waitlisted</option>
+                </select>
+            </div>
+
+            <!-- Score Sorting -->
+            <div class="col-md-4">
+                <label for="score_sort">Sort by GPA:</label>
+                <select name="score_sort" class="form-select">
+                    <option value="">None</option>
+                    <option value="high_to_low" {% if request.GET.score_sort == "high_to_low" %}selected{% endif %}>High to Low</option>
+                    <option value="low_to_high" {% if request.GET.score_sort == "low_to_high" %}selected{% endif %}>Low to High</option>
+                </select>
+            </div>
         </div>
-    </div>
-    
-    <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
-</form>
+        
+        <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
+    </form>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Program Fit</th>
-            <th>GPA</th>
-            <th>Colleges Applied & Status</th>
-            <th>
-                <data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Candidate score is based on:
-              - GPA (max 30)
-              - Skills (max 20)
-              - Projects (max 20)
-              - Academic Experience (max 30)">
-                  Rating(/100)
-              </th>
-              
-            <th>Message</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for candidate in candidates %}
-<tr>
-    <td>
-        <a href="{% url 'candidate_profile' candidate.id %}">{{ candidate.name }}</a>
-    </td>
-    <td>{{ candidate.email }}</td>
-    <td>{{ candidate.get_program_fit_display }}</td>
-    <td>
-        <span 
-            {% if candidate.gpa > 3.7 %}
-                style="color: green; font-weight: bold;"
-            {% elif candidate.gpa < 2.5 %}
-                style="color: red; font-weight: bold;"
-            {% endif %}
-        >
-            {{ candidate.gpa }}
-        </span>
-    <td>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>College Name</th>
-                    <th>Application Status</th>
-                    <th>Update Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for application in candidate.applications.all %}
-                <tr>
-                    <td>{{ application.college_name }}</td>
-                    <td>{{ application.get_application_status_display }}</td>
-                    <td>
-                        <form method="post" action="{% url 'update_candidate_status' application.id %}">
-                            {% csrf_token %}
-                            <select name="application_status" class="form-select">
-                                <option value="pending" {% if application.application_status == "pending" %}selected{% endif %}>Pending</option>
-                                <option value="accepted" {% if application.application_status == "accepted" %}selected{% endif %}>Accepted</option>
-                                <option value="rejected" {% if application.application_status == "rejected" %}selected{% endif %}>Rejected</option>
-                                <option value="waitlisted" {% if application.application_status == "waitlisted" %}selected{% endif %}>Waitlisted</option>
-                            </select>
-                            <button type="submit" class="btn btn-sm btn-primary mt-1">Update</button>
-                        </form>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="3">No applications found.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </td>
-    <td>
-        <span class="badge bg-info text-dark">
-            {{ candidate.score }}
-        </span>
-    </td>
-    
-    <td>
-        <form method="post" action="{% url 'send_message' %}">
-            {% csrf_token %}
-            <input type="hidden" name="candidate_id" value="{{ candidate.id }}">
-            <textarea name="content" class="form-control" placeholder="Write your message here..." required></textarea>
-            <button type="submit" class="btn btn-primary mt-2">Send</button>
-        </form>
-    </td>
-</tr>
-{% empty %}
-<tr>
-    <td colspan="7" class="text-center">No candidates found.</td>
-</tr>
-{% endfor %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Program Fit</th>
+                <th>GPA</th>
+                <th>Colleges Applied & Status</th>
+                <th>
+                    <data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Candidate score is based on:
+                - GPA (max 30)
+                - Skills (max 20)
+                - Projects (max 20)
+                - Academic Experience (max 30)">
+                    Rating(/100)
+                </th>
+                
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for candidate in candidates %}
+    <tr>
+        <td>
+            <a href="{% url 'candidate_profile' candidate.id %}">{{ candidate.name }}</a>
+        </td>
+        <td>{{ candidate.email }}</td>
+        <td>{{ candidate.get_program_fit_display }}</td>
+        <td>
+            <span 
+                {% if candidate.gpa > 3.7 %}
+                    style="color: green; font-weight: bold;"
+                {% elif candidate.gpa < 2.5 %}
+                    style="color: red; font-weight: bold;"
+                {% endif %}
+            >
+                {{ candidate.gpa }}
+            </span>
+        <td>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>College Name</th>
+                        <th>Application Status</th>
+                        <th>Update Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for application in candidate.applications.all %}
+                    <tr>
+                        <td>{{ application.college_name }}</td>
+                        <td>{{ application.get_application_status_display }}</td>
+                        <td>
+                            <form method="post" action="{% url 'update_candidate_status' application.id %}">
+                                {% csrf_token %}
+                                <select name="application_status" class="form-select">
+                                    <option value="pending" {% if application.application_status == "pending" %}selected{% endif %}>Pending</option>
+                                    <option value="accepted" {% if application.application_status == "accepted" %}selected{% endif %}>Accepted</option>
+                                    <option value="rejected" {% if application.application_status == "rejected" %}selected{% endif %}>Rejected</option>
+                                    <option value="waitlisted" {% if application.application_status == "waitlisted" %}selected{% endif %}>Waitlisted</option>
+                                </select>
+                                <button type="submit" class="btn btn-sm btn-primary mt-1">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">No applications found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </td>
+        <td>
+            <span class="badge bg-info text-dark">
+                {{ candidate.score }}
+            </span>
+        </td>
+        
+        <td>
+            <form method="post" action="{% url 'send_message' %}">
+                {% csrf_token %}
+                <input type="hidden" name="candidate_id" value="{{ candidate.id }}">
+                <textarea name="content" class="form-control" placeholder="Write your message here..." required></textarea>
+                <button type="submit" class="btn btn-primary mt-2">Send</button>
+            </form>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="7" class="text-center">No candidates found.</td>
+    </tr>
+    {% endfor %}
 
-    </tbody>
-</table>
-
+        </tbody>
+    </table>
+    {% endblock %}
+</main>
     <footer>
         <p>&copy; 2025 Admissions Dashboard. All Rights Reserved.</p>
     </footer>

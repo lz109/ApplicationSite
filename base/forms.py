@@ -48,4 +48,4 @@ class MultipleFileField(forms.FileField):
 
 # The form for uploading multiple candidate documents
 class DocumentUploadForm(forms.Form):
-    files = MultipleFileField(label='Select candidate documents')
+    files = MultipleFileField(label="Upload Candidate Resume")
