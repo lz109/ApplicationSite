@@ -153,7 +153,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Enable WhiteNoise for serving static files
 INSTALLED_APPS += ['whitenoise.runserver_nostatic']
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')

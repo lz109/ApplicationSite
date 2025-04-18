@@ -1,0 +1,329 @@
+/* 🌍 Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f8fb; /* Light blue-gray background */
+  color: #333; /* Dark gray text */
+  text-align: center;
+}
+
+/* 🔹 Header */
+header {
+  background-color: #004080; /* Dark blue */
+  color: white;
+  padding: 20px;
+  font-size: 22px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+nav ul li a:hover {
+  background-color: #0056b3;
+  transition: 0.3s;
+}
+
+/* 🔹 Hero Section */
+.hero {
+  background: linear-gradient(135deg, #007BFF, #004080); /* Gradient blue */
+  color: white;
+  padding: 50px 20px;
+  margin-bottom: 30px;
+}
+
+.hero h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.hero-buttons .button-style {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 20px;
+  background-color: white;
+  color: #004080;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #004080;
+}
+
+.hero-buttons .button-style:hover {
+  background-color: #004080;
+  color: white;
+  transition: 0.3s;
+}
+
+/* 🔹 Features Section */
+.features {
+  padding: 40px;
+}
+
+.feature-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.feature-box {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  text-align: center;
+}
+
+.feature-box h3 {
+  font-size: 20px;
+  color: #004080;
+}
+
+.feature-box p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* 🔹 Benefits Section */
+.benefits {
+  padding: 40px;
+  background: #eef;
+  text-align: left;
+  max-width: 800px;
+  margin: auto;
+}
+
+.benefits ul {
+  list-style: none;
+  padding: 0;
+}
+
+.benefits ul li {
+  font-size: 16px;
+  padding: 5px 0;
+}
+
+/* 🔹 Buttons */
+.button-login {
+  background: #007BFF;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button-register {
+  background: #28A745;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button-logout {
+  background: #DC3545;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button-login:hover,
+.button-register:hover,
+.button-logout:hover {
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+/* 🔹 Footer */
+footer {
+  background-color: #004080;
+  color: white;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Page Title */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Messages Section */
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Message Tables */
+.table {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table th {
+  background-color: #007bff;
+  color: white;
+  text-align: left;
+  padding: 10px;
+}
+
+.table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Column Containers */
+.col-md-6 {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h3 {
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Empty Message Text */
+.text-center {
+  color: #666;
+  font-style: italic;
+}
+.centered-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Scrollable Table Container */
+.scrollable-table {
+  max-height: 300px;  /* Limit height and enable scrolling */
+  overflow-y: auto;
+  overflow-x: auto; /* Ensures horizontal scrolling if needed */
+  border: 1px solid #ddd;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ensures the container stretches */
+}
+table { 
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Table Styling */
+.fixed-width {
+  width: 100%;  /* Ensures full width */
+  min-width: 1000px; /* Increases minimum width to ensure columns expand */
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Table Header */
+.fixed-width th {
+  background: #007bff; /* Nice blue header */
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+/* Table Cells */
+.fixed-width td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  word-wrap: break-word;
+}
+
+/* Message Column */
+.fixed-width .message-content {
+  white-space: normal; /* Allows wrapping */
+  word-wrap: break-word;
+  max-width: 600px; /* Allows wider messages */
+}
+
+/* Alternating Row Colors */
+.fixed-width tbody tr:nth-child(odd) {
+  background-color: #f9f9f9; /* Light gray for contrast */
+}
+
+/* Hover Effect */
+.fixed-width tbody tr:hover {
+  background-color: #eef5ff; /* Soft blue on hover */
+}
+
+/* Empty Table Message */
+.fixed-width tbody td.text-center {
+  text-align: center;
+  font-style: italic;
+  color: #666;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  .fixed-width {
+      font-size: 14px;
+      min-width: 800px; /* Ensures readability on smaller screens */
+  }
+}
+.hero {
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero p {
+  max-width: 800px;
+  margin: 0 auto 1rem auto;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
