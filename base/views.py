@@ -132,7 +132,25 @@ def calculate_score(self):
 
     return round(score, 1)
 
+import spacy
+from spacy.util import is_package
+import spacy.cli
+def ensure_spacy_model(model_name="en_core_web_sm"):
+    if not is_package(model_name):
+        try:
+            spacy.cli.download(model_name)
+        except Exception as e:
+            raise RuntimeError(f"Failed to download spaCy model '{model_name}': {e}")
+    spacy.load(model_name)
+import nltk
 
+def ensure_nltk_corpora():
+    for corpus in ["stopwords", "words"]:
+        try:
+            nltk.data.find(f"corpora/{corpus}")
+        except LookupError:
+            print(f"Downloading NLTK corpus: {corpus}")
+            nltk.download(corpus)
 @login_required
 @user_passes_test(is_officer)
 def officer_dashboard(request):
@@ -150,6 +168,13 @@ def officer_dashboard(request):
     if request.method == "POST":
         form = DocumentUploadForm(request.POST, request.FILES)
         if form.is_valid():
+            try:
+                ensure_spacy_model()
+                ensure_nltk_corpora()
+                from pydparser import ResumeParser
+            except Exception as e:
+                messages.error(request, f"Model download error: {e}")
+                return render(request, "upload.html", {"form": form})
             uploaded_files = request.FILES.getlist('files')
             for uploaded_file in uploaded_files:
                 fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'uploads'))
