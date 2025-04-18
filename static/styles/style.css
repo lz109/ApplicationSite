@@ -311,3 +311,19 @@ table {
       min-width: 800px; /* Ensures readability on smaller screens */
   }
 }
+.hero {
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero p {
+  max-width: 800px;
+  margin: 0 auto 1rem auto;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}

@@ -30,13 +30,15 @@ from django.db import IntegrityError
 
 from pyresparser import ResumeParser
 
-def home(request): 
-    return render(request, "home.html")
+from .forms import RegisterForm, SignInForm
+
+def home(request):
+    return render(request, "home.html", {
+        "register_form": RegisterForm(),
+        "signin_form": SignInForm()
+    })
 
 def signup(request):
-    # if request.user.is_authenticated:
-    #     return redirect("/dashboard")
-    
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -46,33 +48,40 @@ def signup(request):
             return redirect("/dashboard")
         else:
             messages.error(request, "Registration failed.")
-    
     else:
         form = RegisterForm()
-    
-    return render(request, "signup.html", {"form": form})
+
+    return render(request, "home.html", {
+        "register_form": form,
+        "signin_form": SignInForm()  # Still pass it in
+    })
 
 def signin(request):
     if request.user.is_authenticated:
         return redirect("/dashboard")
-    
+
     if request.method == "POST":
         form = SignInForm(request, data=request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
+            user = authenticate(
+                request,
+                username=form.cleaned_data["username"],
+                password=form.cleaned_data["password"]
+            )
+            if user:
                 login(request, user)
                 messages.success(request, "Login successful.")
                 return redirect("/dashboard")
             else:
                 messages.error(request, "Invalid credentials.")
-    
     else:
         form = SignInForm()
-    
-    return render(request, "signin.html", {"form": form})
+
+    return render(request, "home.html", {
+        "register_form": RegisterForm(),
+        "signin_form": form
+    })
+
 
 def signout(request):
     logout(request)
