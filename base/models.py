@@ -107,11 +107,11 @@ class Candidate(models.Model):
         ('waitlisted', 'Waitlisted'),
     )
     
-    name = models.CharField(max_length=255)
+    name = models.CharField()
     email = models.EmailField(unique=True)
     program_fit = models.CharField(choices=PROGRAM_CHOICES, default='engineering')
     gpa = models.FloatField(default=0.0)
-    application_status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="pending")
+    application_status = models.CharField(choices=STATUS_CHOICES, default="pending")
     shortlisted = models.BooleanField(default=False)
 
     academic_experience = models.TextField(blank=True, null=True)  # Education & coursework
@@ -132,8 +132,8 @@ class CollegeApplication(models.Model):
     )
 
     candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name="applications")
-    college_name = models.CharField(max_length=255)
-    application_status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="pending")
+    college_name = models.CharField()
+    application_status = models.CharField(choices=STATUS_CHOICES, default="pending")
 
     def __str__(self):
         return f"{self.candidate.name} - {self.college_name} ({self.application_status})"
@@ -146,7 +146,7 @@ class Message(models.Model):
 
 # Event Model
 class Event(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField()
     description = models.TextField()
     date = models.DateTimeField()
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
