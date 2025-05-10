@@ -173,25 +173,25 @@ def calculate_score(self):
 
     return round(score, 1)
 
-import spacy
-from spacy.util import is_package
-import spacy.cli
-def ensure_spacy_model(model_name="en_core_web_sm"):
-    if not is_package(model_name):
-        try:
-            spacy.cli.download(model_name)
-        except Exception as e:
-            raise RuntimeError(f"Failed to download spaCy model '{model_name}': {e}")
-    spacy.load(model_name)
-import nltk
+# import spacy
+# from spacy.util import is_package
+# import spacy.cli
+# def ensure_spacy_model(model_name="en_core_web_sm"):
+#     if not is_package(model_name):
+#         try:
+#             spacy.cli.download(model_name)
+#         except Exception as e:
+#             raise RuntimeError(f"Failed to download spaCy model '{model_name}': {e}")
+#     spacy.load(model_name)
+# import nltk
 
-def ensure_nltk_corpora():
-    for corpus in ["stopwords", "words"]:
-        try:
-            nltk.data.find(f"corpora/{corpus}")
-        except LookupError:
-            print(f"Downloading NLTK corpus: {corpus}")
-            nltk.download(corpus)
+# def ensure_nltk_corpora():
+#     for corpus in ["stopwords", "words"]:
+#         try:
+#             nltk.data.find(f"corpora/{corpus}")
+#         except LookupError:
+#             print(f"Downloading NLTK corpus: {corpus}")
+#             nltk.download(corpus)
 
 
             
@@ -386,74 +386,74 @@ def dashboard_data(request):
 @permission_classes([IsAuthenticated])
 @parser_classes([MultiPartParser, FormParser])
 def upload_resume(request):
-    form = DocumentUploadForm(request.data, request.FILES)
-    if not form.is_valid():
-        return Response({"error": "Invalid form."}, status=400)
+    # form = DocumentUploadForm(request.data, request.FILES)
+    # if not form.is_valid():
+    #     return Response({"error": "Invalid form."}, status=400)
 
-    try:
-        ensure_spacy_model()
-        ensure_nltk_corpora()
-    except Exception as e:
-        return Response({"error": f"Model download error: {str(e)}"}, status=500)
+    # try:
+    #     ensure_spacy_model()
+    #     ensure_nltk_corpora()
+    # except Exception as e:
+    #     return Response({"error": f"Model download error: {str(e)}"}, status=500)
 
-    uploaded_files = request.FILES.getlist('files')
-    results = []
+    # uploaded_files = request.FILES.getlist('files')
+    # results = []
 
-    for uploaded_file in uploaded_files:
-        fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'uploads'))
-        filename = fs.save(uploaded_file.name, uploaded_file)
-        file_path = fs.path(filename)
+    # for uploaded_file in uploaded_files:
+    #     fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'uploads'))
+    #     filename = fs.save(uploaded_file.name, uploaded_file)
+    #     file_path = fs.path(filename)
 
-        try:
-            parsed_data = ResumeParser(file_path).get_extracted_data()
-        except Exception as e:
-            return Response({"error": f"Resume parsing failed for {uploaded_file.name}: {e}"}, status=400)
+    #     try:
+    #         parsed_data = ResumeParser(file_path).get_extracted_data()
+    #     except Exception as e:
+    #         return Response({"error": f"Resume parsing failed for {uploaded_file.name}: {e}"}, status=400)
 
-        extracted = {
-            "name": parsed_data.get("name", "").replace("Name: ", ""),
-            "email": parsed_data.get("email", ""),
-            "gpa": parsed_data.get("cgpa", 0),
-            "program": parsed_data.get("degree", [""])[0] if parsed_data.get("degree") else "",
-            "academic_experience": "; ".join(parsed_data.get("experience", [])) if parsed_data.get("experience") else "",
-            "skills": ", ".join(parsed_data.get("skills", [])) if parsed_data.get("skills") else "",
-            "projects": "",
-            "colleges_applied": ""
-        }
+    #     extracted = {
+    #         "name": parsed_data.get("name", "").replace("Name: ", ""),
+    #         "email": parsed_data.get("email", ""),
+    #         "gpa": parsed_data.get("cgpa", 0),
+    #         "program": parsed_data.get("degree", [""])[0] if parsed_data.get("degree") else "",
+    #         "academic_experience": "; ".join(parsed_data.get("experience", [])) if parsed_data.get("experience") else "",
+    #         "skills": ", ".join(parsed_data.get("skills", [])) if parsed_data.get("skills") else "",
+    #         "projects": "",
+    #         "colleges_applied": ""
+    #     }
 
-        # Convert GPA to float safely
-        try:
-            gpa_value = float(extracted["gpa"])
-        except ValueError:
-            gpa_value = None
+    #     # Convert GPA to float safely
+    #     try:
+    #         gpa_value = float(extracted["gpa"])
+    #     except ValueError:
+    #         gpa_value = None
 
-        try:
-            candidate, created = Candidate.objects.update_or_create(
-                name=extracted["name"],
-                defaults={
-                    "email": extracted["email"],
-                    "gpa": gpa_value,
-                    "program_fit": extracted["program"],
-                    "application_status": "pending",
-                    "academic_experience": extracted["academic_experience"],
-                    "skills": extracted["skills"],
-                    "projects": extracted["projects"],
-                    "officer": request.user
-                }
-            )
+    #     try:
+    #         candidate, created = Candidate.objects.update_or_create(
+    #             name=extracted["name"],
+    #             defaults={
+    #                 "email": extracted["email"],
+    #                 "gpa": gpa_value,
+    #                 "program_fit": extracted["program"],
+    #                 "application_status": "pending",
+    #                 "academic_experience": extracted["academic_experience"],
+    #                 "skills": extracted["skills"],
+    #                 "projects": extracted["projects"],
+    #                 "officer": request.user
+    #             }
+    #         )
 
-            college_names = extracted.get("colleges_applied", "").split(",")
-            for college_name in map(str.strip, college_names):
-                if college_name:
-                    CollegeApplication.objects.get_or_create(
-                        candidate=candidate,
-                        college_name=college_name,
-                        defaults={"application_status": "pending"}
-                    )
+    #         college_names = extracted.get("colleges_applied", "").split(",")
+    #         for college_name in map(str.strip, college_names):
+    #             if college_name:
+    #                 CollegeApplication.objects.get_or_create(
+    #                     candidate=candidate,
+    #                     college_name=college_name,
+    #                     defaults={"application_status": "pending"}
+    #                 )
 
-            results.append({"candidate": candidate.name, "status": "created" if created else "updated"})
+    #         results.append({"candidate": candidate.name, "status": "created" if created else "updated"})
 
-        except IntegrityError as e:
-            return Response({"error": f"Database error: {e}"}, status=400)
+    #     except IntegrityError as e:
+    #         return Response({"error": f"Database error: {e}"}, status=400)
 
     return Response({"message": "Resumes processed successfully", "results": results}, status=200)
 
