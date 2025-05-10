@@ -9,6 +9,8 @@ class User(AbstractUser):
     ]
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default="officer")
     job_title = models.CharField(max_length=255, blank=True, null=True)
+    profile_photo = models.ImageField(upload_to="profile_photos/", blank=True, null=True)
+
     class Meta:
         app_label = "base"
 
@@ -138,11 +140,27 @@ class CollegeApplication(models.Model):
     def __str__(self):
         return f"{self.candidate.name} - {self.college_name} ({self.application_status})"
 
-class Message(models.Model):
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
-    receiver_email = models.EmailField()
-    content = models.TextField()
-    timestamp = models.DateTimeField(default=now)
+# models.py
+from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+class Message_new(models.Model):
+    sender = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE)
+    recipient = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE)
+    # In your models.py
+    subject = models.CharField(default='No Subject')  # Add a default value
+    body = models.TextField()
+    sent_at = models.DateTimeField(auto_now_add=True)
+    read_at = models.DateTimeField(null=True, blank=True)
+    is_read = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-sent_at']
+
+    def __str__(self):
+        return f"{self.subject} - {self.sender} to {self.recipient}"
 
 # Event Model
 class Event(models.Model):

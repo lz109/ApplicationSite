@@ -1181,3 +1181,1589 @@ WARNING:django.request:Not Found: /accounts/login/
 INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/forms.py changed, reloading.
 INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/forms.py changed, reloading.
 WARNING:django.request:Not Found: /favicon.ico
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /main.c58e8c1ccfccae0a3349.hot-update.json
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /api/signup/
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /main.39a5eac0b063305f43f5.hot-update.json
+ERROR:django.security.DisallowedHost:Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+WARNING:django.request:Bad Request: /api/signup/
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/webapps/settings.py changed, reloading.
+WARNING:django.request:Bad Request: /api/signup/
+ERROR:django.request:Internal Server Error: /signin
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8000/signin/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+WARNING:django.request:Not Found: /main.54c3aa5683fafbd85992.hot-update.json
+WARNING:django.request:Not Found: /main.072153b14d910bc43f80.hot-update.json
+WARNING:django.request:Not Found: /main.072153b14d910bc43f80.hot-update.json
+WARNING:django.request:Not Found: /main.7a1bfcfebcaaa331245f.hot-update.json
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+WARNING:django.request:Not Found: /main.f3d24fc07103e82befc7.hot-update.json
+WARNING:django.request:Not Found: /main.f3d24fc07103e82befc7.hot-update.json
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+WARNING:django.request:Unauthorized: /api/signin/
+WARNING:django.request:Not Found: /main.628401b8c6b966be9b6c.hot-update.json
+WARNING:django.request:Not Found: /favicon.ico
+WARNING:django.request:Not Found: /main.09fc8b8cb0d3fdd1ec72.hot-update.json
+WARNING:django.request:Not Found: /main.a3d06dd2667ff2cbb968.hot-update.json
+WARNING:django.request:Not Found: /main.c8911a640f88ac169d13.hot-update.json
+WARNING:django.request:Not Found: /main.22700ce0c706fafec4c6.hot-update.json
+WARNING:django.request:Not Found: /favicon.ico
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+ERROR:django.request:Internal Server Error: /officer_dashboard/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/template/loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/webapps/settings.py changed, reloading.
+WARNING:django.request:Not Found: /manifest.json
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/webapps/settings.py changed, reloading.
+WARNING:django.request:Not Found: /images/student_eval.png
+WARNING:django.request:Not Found: /images/event.jpg
+WARNING:django.request:Not Found: /images/track_application.png
+WARNING:django.request:Not Found: /images/hero-classroom.png
+WARNING:django.request:Not Found: /images/feature-tools.png
+WARNING:django.request:Not Found: /manifest.json
+WARNING:django.request:Not Found: /images/student_eval.png
+WARNING:django.request:Not Found: /images/feature-tools.png
+WARNING:django.request:Not Found: /images/track_application.png
+WARNING:django.request:Not Found: /manifest.json
+WARNING:django.request:Not Found: /images/event.jpg
+WARNING:django.request:Not Found: /images/hero-classroom.png
+WARNING:django.request:Not Found: /images/feature-tools.png
+WARNING:django.request:Not Found: /images/track_application.png
+WARNING:django.request:Not Found: /manifest.json
+WARNING:django.request:Not Found: /images/student_eval.png
+WARNING:django.request:Not Found: /images/event.jpg
+WARNING:django.request:Not Found: /images/hero-classroom.png
+WARNING:django.request:Not Found: /manifest.json
+WARNING:django.request:Not Found: /images/feature-tools.png
+WARNING:django.request:Not Found: /images/track_application.png
+WARNING:django.request:Not Found: /images/event.jpg
+WARNING:django.request:Not Found: /images/hero-classroom.png
+WARNING:django.request:Not Found: /images/student_eval.png
+WARNING:django.request:Not Found: /images/track_application.png
+WARNING:django.request:Not Found: /manifest.json
+WARNING:django.request:Not Found: /images/hero-classroom.png
+WARNING:django.request:Not Found: /images/event.jpg
+WARNING:django.request:Not Found: /images/student_eval.png
+WARNING:django.request:Not Found: /images/feature-tools.png
+WARNING:django.request:Not Found: /images/student_eval.png
+WARNING:django.request:Not Found: /images/event.jpg
+WARNING:django.request:Not Found: /images/feature-tools.png
+WARNING:django.request:Not Found: /images/hero-classroom.png
+WARNING:django.request:Not Found: /manifest.json
+WARNING:django.request:Not Found: /images/track_application.png
+WARNING:django.request:Not Found: /manifest.json
+WARNING:django.request:Not Found: /images/track_application.png
+WARNING:django.request:Not Found: /images/feature-tools.png
+WARNING:django.request:Not Found: /images/event.jpg
+WARNING:django.request:Not Found: /images/student_eval.png
+WARNING:django.request:Not Found: /images/hero-classroom.png
+WARNING:django.request:Not Found: /images/student_eval.png
+WARNING:django.request:Not Found: /images/hero-classroom.png
+WARNING:django.request:Not Found: /images/feature-tools.png
+WARNING:django.request:Not Found: /images/event.jpg
+WARNING:django.request:Not Found: /manifest.json
+WARNING:django.request:Not Found: /images/track_application.png
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+WARNING:django.request:Unauthorized: /api/signin/
+WARNING:django.request:Not Found: /images/student_eval.png
+WARNING:django.request:Not Found: /images/event.jpg
+WARNING:django.request:Not Found: /images/track_application.png
+WARNING:django.request:Not Found: /images/feature-tools.png
+WARNING:django.request:Not Found: /images/hero-classroom.png
+WARNING:django.request:Not Found: /manifest.json
+WARNING:django.request:Not Found: /images/student_eval.png
+WARNING:django.request:Not Found: /manifest.json
+WARNING:django.request:Not Found: /images/feature-tools.png
+WARNING:django.request:Not Found: /images/hero-classroom.png
+WARNING:django.request:Not Found: /images/track_application.png
+WARNING:django.request:Not Found: /images/event.jpg
+WARNING:django.request:Not Found: /images/student_eval.png
+WARNING:django.request:Not Found: /images/event.jpg
+WARNING:django.request:Not Found: /images/track_application.png
+WARNING:django.request:Not Found: /images/feature-tools.png
+WARNING:django.request:Not Found: /images/hero-classroom.png
+WARNING:django.request:Not Found: /manifest.json
+WARNING:django.request:Not Found: /main.596db160070b0f55e174.hot-update.json
+WARNING:django.request:Not Found: /main.aa9cd69177a73912b15e.hot-update.json
+WARNING:django.request:Not Found: /images/event.jpg
+WARNING:django.request:Not Found: /images/student_eval.png
+WARNING:django.request:Not Found: /images/feature-tools.png
+WARNING:django.request:Not Found: /images/track_application.png
+WARNING:django.request:Not Found: /images/hero-classroom.png
+WARNING:django.request:Not Found: /manifest.json
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+WARNING:django.request:Not Found: /officer_dashboard/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /officer_dashboard/
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /main.9f81d595070796482b36.hot-update.json
+WARNING:django.request:Not Found: /main.9f81d595070796482b36.hot-update.json
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /main.cd7736e24ce98b5250eb.hot-update.json
+WARNING:django.request:Not Found: /main.cd7736e24ce98b5250eb.hot-update.json
+WARNING:django.request:Not Found: /main.cd7736e24ce98b5250eb.hot-update.json
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /main.68bc6586ab70b0ca3902.hot-update.json
+WARNING:django.request:Not Found: /main.10a4f1cecda4dbc3c81a.hot-update.json
+WARNING:django.request:Not Found: /main.32d0c4248d66706c4f6a.hot-update.json
+WARNING:django.request:Not Found: /main.ac703303866ef0b48eec.hot-update.json
+WARNING:django.request:Unauthorized: /api/signin/
+WARNING:django.request:Unauthorized: /api/signin/
+WARNING:django.request:Not Found: /main.ad6e7d8a1e573d18d6c3.hot-update.json
+WARNING:django.request:Not Found: /main.45ce4336d936f70aa744.hot-update.json
+WARNING:django.request:Not Found: /main.45ce4336d936f70aa744.hot-update.json
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /main.239580ca90a8edfdbd9d.hot-update.json
+WARNING:django.request:Not Found: /main.2ab9e8a77cbc9c0d741d.hot-update.json
+WARNING:django.request:Not Found: /main.239580ca90a8edfdbd9d.hot-update.json
+WARNING:django.request:Not Found: /main.239580ca90a8edfdbd9d.hot-update.json
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /officer_dashboard/candidates
+WARNING:django.request:Not Found: /main.99342c216e701486e508.hot-update.json
+WARNING:django.request:Not Found: /main.99342c216e701486e508.hot-update.json
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /main.4a49d715943e18693124.hot-update.json
+WARNING:django.request:Not Found: /main.6082a14c785fa5e935d7.hot-update.json
+WARNING:django.request:Not Found: /main.2b465bf4683bd013f30d.hot-update.json
+WARNING:django.request:Not Found: /main.2b465bf4683bd013f30d.hot-update.json
+WARNING:django.request:Unauthorized: /api/signin/
+WARNING:django.request:Not Found: /main.60bcd79e99140342bfa5.hot-update.json
+WARNING:django.request:Not Found: /main.60bcd79e99140342bfa5.hot-update.json
+WARNING:django.request:Not Found: /main.60bcd79e99140342bfa5.hot-update.json
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /officer_dashboard/add-candidate
+WARNING:django.request:Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /main.20b4e332a57afb8cd66c.hot-update.json
+WARNING:django.request:Not Found: /main.20b4e332a57afb8cd66c.hot-update.json
+WARNING:django.request:Not Found: /main.20b4e332a57afb8cd66c.hot-update.json
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /main.20b4e332a57afb8cd66c.hot-update.json
+WARNING:django.request:Not Found: /api/officers/
+WARNING:django.request:Not Found: /api/officers/
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+WARNING:django.request:Not Found: /main.6d7bfb20c79f7c63a51c.hot-update.json
+WARNING:django.request:Not Found: /main.5493ccc54a9ce47b8055.hot-update.json
+WARNING:django.request:Not Found: /main.5493ccc54a9ce47b8055.hot-update.json
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/models.py changed, reloading.
+WARNING:django.request:Not Found: /main.4f1d3f05124188a92b50.hot-update.json
+WARNING:django.request:Not Found: /main.9ee16d90a55f04fad1d5.hot-update.json
+WARNING:django.request:Not Found: /main.4f1d3f05124188a92b50.hot-update.json
+WARNING:django.request:Not Found: /main.4f1d3f05124188a92b50.hot-update.json
+WARNING:django.request:Not Found: /main.4f1d3f05124188a92b50.hot-update.json
+ERROR:django.request:Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1248, in profile_view
+    "contact_details": user.contact_details,
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'contact_details'
+ERROR:django.request:Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1248, in profile_view
+    "contact_details": user.contact_details,
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'contact_details'
+ERROR:django.request:Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1248, in profile_view
+    "contact_details": user.contact_details,
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'contact_details'
+ERROR:django.request:Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1248, in profile_view
+    "contact_details": user.contact_details,
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'contact_details'
+ERROR:django.request:Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1248, in profile_view
+    "contact_details": user.contact_details,
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'contact_details'
+ERROR:django.request:Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1248, in profile_view
+    "contact_details": user.contact_details,
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'contact_details'
+WARNING:django.request:Forbidden: /api/profile/upload-photo/
+ERROR:django.request:Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1248, in profile_view
+    "contact_details": user.contact_details,
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'contact_details'
+ERROR:django.request:Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1248, in profile_view
+    "contact_details": user.contact_details,
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'contact_details'
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/webapps/settings.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/webapps/settings.py changed, reloading.
+WARNING:django.request:Not Found: /main.d4d2add4d41132b4398f.hot-update.json
+WARNING:django.request:Not Found: /main.d4d2add4d41132b4398f.hot-update.json
+WARNING:django.request:Not Found: /main.d4d2add4d41132b4398f.hot-update.json
+WARNING:django.request:Not Found: /main.d4d2add4d41132b4398f.hot-update.json
+WARNING:django.request:Not Found: /main.d4d2add4d41132b4398f.hot-update.json
+ERROR:django.request:Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1248, in profile_view
+    "contact_details": user.contact_details,
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'contact_details'
+ERROR:django.request:Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1248, in profile_view
+    "contact_details": user.contact_details,
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'contact_details'
+WARNING:django.request:Not Found: /main.747876e2eaf927de10a9.hot-update.json
+WARNING:django.request:Not Found: /main.747876e2eaf927de10a9.hot-update.json
+ERROR:django.request:Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1248, in profile_view
+    "contact_details": user.contact_details,
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'contact_details'
+ERROR:django.request:Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1248, in profile_view
+    "contact_details": user.contact_details,
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'contact_details'
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+WARNING:django.request:Not Found: /main.0f6874d3cabc2ac48192.hot-update.json
+WARNING:django.request:Not Found: /main.0f6874d3cabc2ac48192.hot-update.json
+WARNING:django.request:Not Found: /main.0f6874d3cabc2ac48192.hot-update.json
+WARNING:django.request:Forbidden: /api/profile/upload-photo/
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/webapps/settings.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/webapps/settings.py changed, reloading.
+WARNING:django.request:Not Found: /main.7c7ccbc1f79ac235ce7b.hot-update.json
+WARNING:django.request:Not Found: /main.103d2b0edb57ccdf2e06.hot-update.json
+WARNING:django.request:Not Found: /main.103d2b0edb57ccdf2e06.hot-update.json
+WARNING:django.request:Not Found: /main.103d2b0edb57ccdf2e06.hot-update.json
+WARNING:django.request:Forbidden: /api/add_candidate/
+WARNING:django.request:Not Found: /main.ee71f5d5064d35f7e601.hot-update.json
+WARNING:django.request:Not Found: /main.ee71f5d5064d35f7e601.hot-update.json
+WARNING:django.request:Not Found: /main.ee71f5d5064d35f7e601.hot-update.json
+WARNING:django.request:Unauthorized: /api/signin/
+WARNING:django.request:Not Found: /main.a06cdbe4d52585633314.hot-update.json
+WARNING:django.request:Not Found: /main.aa1f4821e300f3881dc4.hot-update.json
+WARNING:django.request:Not Found: /main.a06cdbe4d52585633314.hot-update.json
+WARNING:django.request:Not Found: /main.a06cdbe4d52585633314.hot-update.json
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+WARNING:django.request:Not Found: /main.1cced3fef78b58f40893.hot-update.json
+WARNING:django.request:Not Found: /main.1cced3fef78b58f40893.hot-update.json
+WARNING:django.request:Not Found: /main.1cced3fef78b58f40893.hot-update.json
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+WARNING:django.request:Not Found: /main.a84baf7efa9d40608acf.hot-update.json
+WARNING:django.request:Not Found: /main.a84baf7efa9d40608acf.hot-update.json
+WARNING:django.request:Not Found: /main.a5451d147ff2fa4ee9dd.hot-update.json
+WARNING:django.request:Not Found: /main.a5451d147ff2fa4ee9dd.hot-update.json
+WARNING:django.request:Unauthorized: /api/signin/
+WARNING:django.request:Not Found: /main.793ceec246a34fe4b786.hot-update.json
+WARNING:django.request:Not Found: /main.793ceec246a34fe4b786.hot-update.json
+WARNING:django.request:Not Found: /main.793ceec246a34fe4b786.hot-update.json
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+WARNING:django.request:Not Found: /main.9467a4315b946315d106.hot-update.json
+WARNING:django.request:Not Found: /main.9467a4315b946315d106.hot-update.json
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/models.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+WARNING:django.request:Not Found: /main.bf27ab1d77b7a5d3c7b7.hot-update.json
+WARNING:django.request:Not Found: /main.de972af1ae7ac8718a72.hot-update.json
+WARNING:django.request:Not Found: /main.bf27ab1d77b7a5d3c7b7.hot-update.json
+WARNING:django.request:Not Found: /main.bf27ab1d77b7a5d3c7b7.hot-update.json
+WARNING:django.request:Not Found: /main.bf27ab1d77b7a5d3c7b7.hot-update.json
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+WARNING:django.request:Not Found: /main.c91f3beca6df2d8ac4ca.hot-update.json
+WARNING:django.request:Not Found: /main.218aa8806826e60fdfec.hot-update.json
+WARNING:django.request:Not Found: /main.218aa8806826e60fdfec.hot-update.json
+WARNING:django.request:Not Found: /main.fa819013dbf10c343dea.hot-update.json
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+WARNING:django.request:Unauthorized: /api/signin/
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+WARNING:django.request:Not Found: /main.07c00cb5fdd415138d02.hot-update.json
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+WARNING:django.request:Not Found: /main.911a05e4e1fa0a300acb.hot-update.json
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+WARNING:django.request:Not Found: /main.f56b829666fe8a29f41d.hot-update.json
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1257, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/views.py changed, reloading.
+WARNING:django.request:Not Found: /main.2cc4c2397ac744ae58a8.hot-update.json
+WARNING:django.request:Not Found: /main.2cc4c2397ac744ae58a8.hot-update.json
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1290, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1290, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1290, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1290, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+WARNING:django.request:Forbidden: /api/create_event/
+WARNING:django.request:Forbidden: /api/create_event/
+WARNING:django.request:Not Found: /main.98388dca0c7d82967bd9.hot-update.json
+WARNING:django.request:Bad Request: /api/upload_resume/
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1290, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1290, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1290, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+ERROR:django.request:Internal Server Error: /api/recipients/
+Traceback (most recent call last):
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linzhan/anaconda3/lib/python3.12/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/cmu/capstone_1/base/views.py", line 1290, in list_message_recipients
+    officers = User.objects.filter(role="officer").values("id", "username").annotate(role_label=models.Value("officer", output_field=models.CharField()))
+                                                                                                ^^^^^^
+NameError: name 'models' is not defined
+INFO:django.utils.autoreload:/mnt/d/cmu/capstone_1/base/urls.py changed, reloading.
+WARNING:django.request:Not Found: /main.8eabb23e264b6943f359.hot-update.json
+WARNING:django.request:Forbidden: /api/logout/
+WARNING:django.request:Not Found: /main.371a45119c78b5658d56.hot-update.json
+WARNING:django.request:Not Found: /main.371a45119c78b5658d56.hot-update.json

@@ -1,0 +1,84 @@
+/* src/sections/hero.css */
+
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  /* align-items: center;*/
+  justify-content: center; 
+  text-align: left;
+  color: #00332c;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  padding: 2rem;
+  padding-top: 25vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.75); /* light white overlay */
+  z-index: -1;
+}
+
+/* .hero .container {
+  max-width: 850px;
+  /*background: rgba(255, 255, 255, 0.3); /* transparent white panel 
+  padding: 2rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+} */
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.hero p.lead {
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.hero button {
+  padding: 0.6rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-radius: 0.75rem;
+  background-color: #168651;
+  color: white;
+  border: none;
+  margin-right: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.hero button:hover {
+  background-color: #0f6a42;
+  cursor: pointer;
+}
+
+.hero .stars {
+  color: #ffc107;
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.hero .rating-labels {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.hero .blockquote {
+  font-style: italic;
+  color: #004d40;
+  font-size: 1rem;
+  margin-top: 2rem;
+}

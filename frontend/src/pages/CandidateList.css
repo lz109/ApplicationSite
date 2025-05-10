@@ -1,0 +1,244 @@
+/* CandidateList.css */
+
+/* Main container */
+.candidate-list-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  /* Header */
+  .candidate-list-header {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #1e293b;
+    position: relative;
+    padding-bottom: 0.75rem;
+  }
+  
+  .candidate-list-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    border-radius: 2px;
+  }
+  
+  /* Filter controls */
+  .filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  
+  .filter-control {
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background-color: #f8fafc;
+  }
+  
+  .filter-control:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    background-color: white;
+  }
+  
+  /* Main table */
+  .candidate-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Table header */
+  .table-header {
+    background-color: #f8fafc;
+  }
+  
+  .table-header th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  /* Table rows */
+  .table-row {
+    transition: background-color 0.2s ease;
+  }
+  
+  .table-row:hover {
+    background-color: #f8fafc;
+  }
+  
+  .table-row td {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+  
+  /* GPA styling */
+  .gpa-excellent {
+    color: #10b981;
+    font-weight: 600;
+  }
+  
+  .gpa-poor {
+    color: #ef4444;
+    font-weight: 600;
+  }
+  
+  /* Nested applications table */
+  .applications-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .applications-table th,
+  .applications-table td {
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .applications-table th {
+    background-color: #f1f5f9;
+    font-weight: 500;
+  }
+  
+  /* Status badges */
+  .status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+  
+  .status-pending {
+    background-color: #fef3c7;
+    color: #92400e;
+  }
+  
+  .status-accepted {
+    background-color: #d1fae5;
+    color: #065f46;
+  }
+  
+  .status-rejected {
+    background-color: #fee2e2;
+    color: #991b1b;
+  }
+  
+  .status-waitlisted {
+    background-color: #e0e7ff;
+    color: #4338ca;
+  }
+  
+  /* Message area */
+  .message-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    min-height: 80px;
+    resize: vertical;
+    transition: all 0.2s ease;
+  }
+  
+  .message-textarea:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  }
+  
+  .send-button {
+    background-color: #6366f1;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .send-button:hover {
+    background-color: #4f46e5;
+  }
+  
+  /* Link styling */
+  .candidate-link {
+    color: #3b82f6;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .candidate-link:hover {
+    color: #2563eb;
+    text-decoration: underline;
+  }
+  
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: #64748b;
+    background-color: #f8fafc;
+    border-radius: 8px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .candidate-table {
+      display: block;
+      overflow-x: auto;
+    }
+    
+    .filter-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .candidate-list-container {
+      padding: 1rem;
+    }
+    
+    .filter-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .table-header th,
+    .table-row td {
+      padding: 0.75rem 0.5rem;
+      font-size: 0.85rem;
+    }
+    
+    .applications-table {
+      font-size: 0.8rem;
+    }
+  }

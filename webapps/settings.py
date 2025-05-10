@@ -26,6 +26,7 @@ SECRET_KEY = "django-insecure-oirwdv^#ea@il_z&#8#y--5*@480801@y0nu)qog)7zplzsll@
 DEBUG = True
 
 ALLOWED_HOSTS = ["admissionsite-c25a7306aecd.herokuapp.com",
+                 "localhost",
                  '127.0.0.1']
 
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'base.apps.BaseConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -153,7 +155,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Enable WhiteNoise for serving static files
 INSTALLED_APPS += ['whitenoise.runserver_nostatic']
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
@@ -162,3 +164,18 @@ MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "base.User"
+
+# TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'templates')]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/static')]
+TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'frontend', 'build')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend', 'build', 'static')]
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",  # your React frontend
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+]
